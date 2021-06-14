@@ -1,6 +1,12 @@
-com/subdefender/game/welcome/Buttons.java
- com.subdefender.game.welcome.Buttons
-com/subdefender/game/welcome/screen.java
- com.subdefender.game.welcome.screen
+com/subdefender/game/gui/components/image.java
+ com.subdefender.game.gui.components.image
+com/subdefender/game/gui/screen.java
+ com.subdefender.game.gui.screen
+com/subdefender/game/gui/components/buttons.java
+ com.subdefender.game.gui.components.buttons
+com/subdefender/game/gui/components/sound.java
+ com.subdefender.game.gui.components.sound
 com/subdefender/game/subdefenderApp.java
  com.subdefender.game.subdefenderApp
+com/subdefender/game/gui/Screens/welcomeScreen.java
+ com.subdefender.game.gui.Screens.welcomeScreen

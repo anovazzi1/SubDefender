@@ -4,7 +4,6 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.graphics.Color;
 import com.subdefender.game.subdefenderApp;
-import com.subdefender.game.welcome.screen;
 
 
 public class DesktopLauncher {
@@ -12,7 +11,7 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setTitle("SubDefender");
 		config.setWindowedMode(1000,600);
-		config.setInitialBackgroundColor(Color.BLUE);
+		config.setResizable(false);
 		new Lwjgl3Application(new subdefenderApp(), config);
 	}
 }

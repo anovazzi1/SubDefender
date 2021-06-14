@@ -1,35 +1,35 @@
 package com.subdefender.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.subdefender.game.welcome.screen;
+import com.subdefender.game.gui.Screens.welcomeScreen;
 
 public class subdefenderApp extends Game {
-	SpriteBatch batch;
-	screen staticBackground;
-
+	public AssetManager manager;
+	public SpriteBatch batch;
+	public OrthographicCamera camera;
+	private welcomeScreen firstScreen = new welcomeScreen(this);
 
 	@Override
 	public void create () {
-		staticBackground = new screen();
-		staticBackground.create();
+		manager = new AssetManager();
 		batch = new SpriteBatch();
-
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false,480,720);
+		this.setScreen(firstScreen);
 	}
 
 	@Override
 	public void render () {
-
-		batch.begin();
-		batch.draw(staticBackground.getImg(),120, 430);
-		batch.end();
-
-
+		super.render();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		staticBackground.dispose();
+		this.getScreen().dispose();
+		manager.dispose();
 	}
 }
