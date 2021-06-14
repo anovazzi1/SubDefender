@@ -10,7 +10,6 @@ public class subdefenderApp extends Game {
 	public AssetManager manager;
 	public SpriteBatch batch;
 	public OrthographicCamera camera;
-	private welcomeScreen firstScreen = new welcomeScreen(this);
 
 	@Override
 	public void create () {
@@ -18,7 +17,7 @@ public class subdefenderApp extends Game {
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false,480,720);
-		this.setScreen(firstScreen);
+		this.setScreen(new welcomeScreen(this));
 	}
 
 	@Override
