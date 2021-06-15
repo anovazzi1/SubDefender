@@ -10,14 +10,17 @@ public class subdefenderApp extends Game {
 	public AssetManager manager;
 	public SpriteBatch batch;
 	public OrthographicCamera camera;
+	public welcomeScreen firstScreen;
 
 	@Override
 	public void create () {
+		camera = new OrthographicCamera();
 		manager = new AssetManager();
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false,480,720);
-		this.setScreen(new welcomeScreen(this));
+		firstScreen = new welcomeScreen(this);
+		this.setScreen(firstScreen);
 	}
 
 	@Override
@@ -28,7 +31,7 @@ public class subdefenderApp extends Game {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		this.getScreen().dispose();
 		manager.dispose();
+		firstScreen.dispose();
 	}
 }
