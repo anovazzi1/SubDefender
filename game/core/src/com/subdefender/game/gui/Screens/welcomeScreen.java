@@ -2,48 +2,40 @@ package com.subdefender.game.gui.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.subdefender.game.gui.components.image;
+import com.subdefender.game.gui.components.buttons;
+import com.subdefender.game.gui.components.gameTitle;
+import com.subdefender.game.gui.components.themeMusic;
 import com.subdefender.game.subdefenderApp;
-
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class welcomeScreen implements Screen {
 
     private final subdefenderApp game;
-    private image title;
-    private Music theme;
     private Stage stage;
-    private Image title_fade;
+    private gameTitle logo;
+    private buttons menuButtons;
 
     public welcomeScreen(final subdefenderApp game)
     {
+        logo = new gameTitle();
         this.game = game;
         this.stage = new Stage(new StretchViewport(1000,600, game.camera));
         Gdx.input.setInputProcessor(stage);
-        title = new image("titulo_800_200px_1.png");
-        title_fade = new Image(title);
-        stage.addActor(title_fade);
-
-
+        stage.addActor(logo);
+        menuButtons = new buttons(game);
     }
 
     @Override
     public void show() {
-        title_fade.setPosition(120,390);
-        theme = Gdx.audio.newMusic(Gdx.files.
-                internal("516076__breviceps__pirate-band-performs-drunken-sailor.wav"));
-        theme.setLooping(true);
-        theme.play();
-        title_fade.addAction(sequence(alpha(0),
+        themeMusic.play();
+        logo.addAction(sequence(alpha(0),
                 parallel(moveBy(0,40,1.7f),fadeIn(1.7f))));
-        title_fade.addAction(after(repeat(100,
+        logo.addAction(after(repeat(100,
                 sequence(moveBy(0,-40,1.7f),moveBy(0,40,1.7f)))));
-
+        initButton();
     }
 
     @Override
@@ -80,8 +72,15 @@ public class welcomeScreen implements Screen {
 
     @Override
     public void dispose() {
-        theme.dispose();
+        themeMusic.dispose();
         stage.dispose();
+        menuButtons.dispose();
+    }
 
+    private void initButton() {
+        menuButtons.playButton();
+        menuButtons.exitButton();
+        stage.addActor(menuButtons.jogar);
+        stage.addActor(menuButtons.sair);
     }
 }
