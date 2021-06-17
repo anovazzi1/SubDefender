@@ -1,8 +1,8 @@
 # Projeto SubDefender
 
 * [Equipe](#equipe)
-* [Vídeos do Projeto](#vídeos do projeto)
-* [Slides do Projeto](#code-example)
+* [Vídeos do Projeto]()
+* [Slides do Projeto]()
 * [Diagramas](#diagramas)
 
 
@@ -17,7 +17,7 @@
 
 
 # Equipe:
-Fernando Filho - 234471
+Fernando dos R. S. Filho - 234471
 
 Otavio Anovazzi - 186331
 
@@ -25,6 +25,7 @@ Otavio Anovazzi - 186331
 
 
 # Slides do Projeto
+
 
 # Diagramas
 
