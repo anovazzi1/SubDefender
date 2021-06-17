@@ -5,7 +5,7 @@
 
 * [Equipe](#equipe)
 * [Vídeos do Projeto](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/subdefender.mp4)
-* [Slides do Projeto](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/Arquitetura_Subdefender.png)
+* [Slides do Projeto](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/SUBDEFENDER.pptx)
 * [Diagramas](#diagramas)
 
 
