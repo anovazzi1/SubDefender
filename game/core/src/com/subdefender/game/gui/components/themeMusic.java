@@ -19,4 +19,6 @@ public class themeMusic {
         theme.dispose();
     }
 
+    public static void pause(){ theme.pause();}
+
 }

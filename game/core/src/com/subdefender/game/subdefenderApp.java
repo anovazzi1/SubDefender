@@ -6,8 +6,9 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.subdefender.game.gui.Screens.gameScreen;
+import com.subdefender.game.gui.Screens.inputScreen;
 import com.subdefender.game.gui.Screens.welcomeScreen;
 
 public class subdefenderApp extends Game {
@@ -19,9 +20,13 @@ public class subdefenderApp extends Game {
 	public AssetManager manager;
 	public SpriteBatch batch;
 	public OrthographicCamera camera;
-	public welcomeScreen firstScreen;
 	public BitmapFont pixel;
 	public Skin skin;
+	public String playerName;
+	public welcomeScreen firstScreen;
+	public inputScreen nameScreen;
+	public gameScreen battleship;
+
 
 
 	@Override
@@ -35,8 +40,10 @@ public class subdefenderApp extends Game {
 		pixel.getData().setScale(1.5f,1.5f);
 		skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 
-
+		nameScreen = new inputScreen(this);
 		firstScreen = new welcomeScreen(this);
+		battleship = new gameScreen(this);
+
 		this.setScreen(firstScreen);
 	}
 
