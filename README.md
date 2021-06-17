@@ -1,8 +1,11 @@
+
+![Logo Subdefender](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/titulo_800_200px.png)
+
 # Projeto SubDefender
 
 * [Equipe](#equipe)
 * [Vídeos do Projeto](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/subdefender.mp4)
-* [Slides do Projeto](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/SUBDEFENDER.pptx)
+* [Slides do Projeto](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/Arquitetura_Subdefender.png)
 * [Diagramas](#diagramas)
 
 
@@ -31,6 +34,8 @@ Otavio Anovazzi - 186331
 
 ## Diagrama Geral do Projeto
 
+![Arquitetura](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/Arquitetura_Subdefender.png)
+
 <!-- ## Diagrama Geral do Componentes
 
 ### Componente 
@@ -42,4 +47,6 @@ Otavio Anovazzi - 186331
 ## Diagrama da hierarquia de exceções
 
 ## Descrição das classes de exceção -->
+
+
 
