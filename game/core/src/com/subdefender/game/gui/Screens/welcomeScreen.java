@@ -30,7 +30,9 @@ public class welcomeScreen implements Screen {
 
     @Override
     public void show() {
-        themeMusic.play();
+        if(game.getisMusicPlaying()) {
+            themeMusic.play();
+        }
         logo.addAction(sequence(alpha(0),
                 parallel(moveBy(0,40,1.7f),fadeIn(1.7f))));
         logo.addAction(after(repeat(100,
@@ -56,7 +58,6 @@ public class welcomeScreen implements Screen {
 
     @Override
     public void pause() {
-
     }
 
     @Override
@@ -80,7 +81,9 @@ public class welcomeScreen implements Screen {
     private void initButton() {
         menuButtons.playButton();
         menuButtons.exitButton();
+        menuButtons.configButton();
         stage.addActor(menuButtons.jogar);
         stage.addActor(menuButtons.sair);
+        stage.addActor(menuButtons.config);
     }
 }

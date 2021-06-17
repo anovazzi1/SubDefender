@@ -2,11 +2,13 @@ package com.subdefender.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.subdefender.game.gui.Screens.configScreen;
 import com.subdefender.game.gui.Screens.gameScreen;
 import com.subdefender.game.gui.Screens.inputScreen;
 import com.subdefender.game.gui.Screens.welcomeScreen;
@@ -24,8 +26,11 @@ public class subdefenderApp extends Game {
 	public Skin skin;
 	public String playerName;
 	public welcomeScreen firstScreen;
-	public inputScreen nameScreen;
-	public gameScreen battleship;
+	public Screen nameScreen;
+	public Screen battleship;
+	public Screen settings;
+	private boolean isMusicPlaying = true;
+	private int dificult=1;
 
 
 
@@ -43,6 +48,7 @@ public class subdefenderApp extends Game {
 		nameScreen = new inputScreen(this);
 		firstScreen = new welcomeScreen(this);
 		battleship = new gameScreen(this);
+		settings = new configScreen(this);
 
 		this.setScreen(firstScreen);
 	}
@@ -51,13 +57,33 @@ public class subdefenderApp extends Game {
 	public void render () {
 		super.render();
 	}
+
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
 		manager.dispose();
-		firstScreen.dispose();
 		pixel.dispose();
 		skin.dispose();
+	}
+
+	public boolean getisMusicPlaying() {
+		return isMusicPlaying;
+	}
+
+	public void setMusicPlaying(boolean musicPlaying) {
+		this.isMusicPlaying = musicPlaying;
+	}
+
+	public boolean isMusicPlaying() {
+		return isMusicPlaying;
+	}
+
+	public int getDificult() {
+		return dificult;
+	}
+
+	public void setDificult(int dificult) {
+		this.dificult = dificult;
 	}
 }

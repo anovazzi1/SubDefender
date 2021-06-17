@@ -9,7 +9,7 @@ public class themeMusic {
 
     public static void play(){
         theme = Gdx.audio.newMusic(Gdx.files.
-                internal("516076__breviceps__pirate-band-performs-drunken-sailor.wav"));
+                internal("sounds/516076__breviceps__pirate-band-performs-drunken-sailor.wav"));
         theme.setLooping(true);
         theme.play();
     }

@@ -8,7 +8,7 @@ public class nameField extends TextField {
         super(text, skin);
         this.setPosition(400,260);
         this.setSize(250,50);
-        this.setColor(0,0,0,0.55f);
+        this.setColor(0.5f,0.5f,2,0.9f);
         this.setMessageText("Nome do Jogador");
         this.setOnlyFontChars(true);
     }

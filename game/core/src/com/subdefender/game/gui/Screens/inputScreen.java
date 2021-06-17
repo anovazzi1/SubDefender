@@ -40,7 +40,6 @@ public class inputScreen implements Screen {
 
     @Override
     public void show() {
-        themeMusic.pause();
         initButtons();
         Gdx.input.setInputProcessor(stage);
         inputButton.iniciar.addListener(new ClickListener(){
