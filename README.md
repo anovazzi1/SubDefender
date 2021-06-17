@@ -1,13 +1,13 @@
 
 ![Logo Subdefender](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/titulo_800_200px.png)
 
-# Projeto SubDefender
 
 * [Equipe](#equipe)
 * [Vídeos do Projeto](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/subdefender.mp4)
 * [Slides do Projeto](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/SUBDEFENDER.pptx)
 * [Diagramas](#diagramas)
 
+# Projeto SubDefender
 
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SUBDEFENDER é um jogo que se passa em um cenário de guerra onde o jogador é um general que deve usar de estratégia para posicionar e defender sua frota de ameaças submarinas, sejam elas humanas ou não. Para isso, o jogador tem à sua disposição alguns torpedos com os quais ele deve abater os submarinos inimigos que estão espalhados aleatoriamente pelo mapa. Além de sobreviver às ameaças humanas, o nosso general deve enfrentar o Kraken, uma criatura mítica e destruidora com o poder de destruir toda uma frota submarina. O jogo acaba quando todos os submarinos inimigos forem destruídos e o Kraken morto antes que a frota do general seja totalmente destruída.
   
