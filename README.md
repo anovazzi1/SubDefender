@@ -1,8 +1,8 @@
 # Projeto SubDefender
 
 * [Equipe](#equipe)
-* [Vídeos do Projeto]()
-* [Slides do Projeto]()
+* [Vídeos do Projeto](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/subdefender.mp4)
+* [Slides do Projeto](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/SUBDEFENDER.pptx)
 * [Diagramas](#diagramas)
 
 
@@ -22,10 +22,10 @@ Fernando dos R. S. Filho - 234471
 Otavio Anovazzi - 186331
 
 # Vídeos do Projeto
-
+[Vídeo](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/subdefender.mp4)
 
 # Slides do Projeto
-
+[Slides de Apresentação](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/SUBDEFENDER.pptx)
 
 # Diagramas
 
