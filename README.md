@@ -34,7 +34,29 @@ Otavio Anovazzi - 186331
 
 ## Diagrama Geral do Projeto
 
-![Arquitetura](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/Arquitetura_Subdefender.png)
+![Arquitetura](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/ArquiteturaSubDefenders/Arquitetura.png)
+
+## Componente Controller
+
+![Controller](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/ArquiteturaSubDefenders/Controller.png)
+
+# Componente GUI
+
+![GUI](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/ArquiteturaSubDefenders/GUI.png)
+
+# Componente Map
+
+![Map](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/ArquiteturaSubDefenders/Map.png)
+
+
+# Componente Players
+
+![Players](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/ArquiteturaSubDefenders/Players.png)
+
+# Componente Items
+
+![Items](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/ArquiteturaSubDefenders/Inventory.png)
+
 
 <!-- ## Diagrama Geral do Componentes
 
