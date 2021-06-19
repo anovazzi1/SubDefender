@@ -19,6 +19,7 @@ public class buttons {
     public TextButton level;
     public TextButton soundController;
     public TextButton back;
+    public TextButton alocate;
     static private String Atual = "normal";
 
     public buttons(subdefenderApp game)
@@ -154,6 +155,13 @@ public class buttons {
                                }
                            }
         );
+    }
+
+    public void alocateButton()
+    {
+        alocate = new TextButton("alocar",skin,"default");
+        alocate.setPosition(700,260);
+        alocate.setSize(120,50);
     }
 
     public void dispose()

@@ -14,36 +14,27 @@ public class gameScreen implements Screen {
     private Stage stage;
     private Image title;
     private Image heart;
-    private Image subOne;
-    private Image subTwo;
-    private Image subThree;
-    private Image subFour;
-    private Image subFive;
+    private submarines subs;
+    private Bullets balas;
 
     public gameScreen(subdefenderApp game)
     {
         this.game = game;
         title = new smallTitle();
-        heart = new heartLogo();
-        subOne = new sub1();
-        subTwo = new sub2();
-        subThree = new sub3();
-        subFour = new sub4();
-        subFive = new sub5();
+        heart = new heartLogo(game);
+        subs = new submarines(game);
+        balas = new Bullets(game);
         stage = new Stage();
         stage.addActor(title);
         stage.addActor(heart);
-        stage.addActor(subOne);
-        stage.addActor(subTwo);
-        stage.addActor(subThree);
-        stage.addActor(subFour);
-        stage.addActor(subFive);
+        subs.addActors(stage);
+        balas.addActors(stage);
     }
 
 
     @Override
     public void show() {
-
+        Gdx.input.setInputProcessor(stage);
 
     }
 
@@ -51,9 +42,19 @@ public class gameScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0,0,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        subs.checkStatus();
         stage.act(delta);
         stage.draw();
-
+        game.batch.begin();
+        game.pixel.draw(game.batch,"x",890,35);
+        game.pixel.draw(game.batch,"x",45,35);
+        game.pixel.draw(game.batch,"x",160,35);
+        game.pixel.draw(game.batch,"x",283,35);
+        game.pixel.draw(game.batch,game.getAmmo(2)+"",75,35);
+        game.pixel.draw(game.batch,game.getAmmo(1)+"",190,35);
+        game.pixel.draw(game.batch,game.getAmmo(0)+"",313,35);
+        game.pixel.draw(game.batch,game.getLifeCounter()+"",920,35);
+        game.batch.end();
     }
 
     @Override
@@ -78,7 +79,8 @@ public class gameScreen implements Screen {
 
     @Override
     public void dispose() {
-        stage.draw();
+        stage.dispose();
+
 
     }
 }

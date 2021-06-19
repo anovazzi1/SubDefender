@@ -48,7 +48,7 @@ public class inputScreen implements Screen {
                                               playerName = nameInput.getText();
                                               System.out.println(playerName);
                                               game.playerName = playerName;
-                                              game.setScreen(game.battleship);
+                                              game.setScreen(game.alocate);
 
                                           }
                                       }
