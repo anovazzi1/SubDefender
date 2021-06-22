@@ -1,28 +1,28 @@
 package com.subdefender.game.gui.components;
 
-import com.badlogic.gdx.graphics.Color;
+
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.subdefender.game.subdefenderApp;
 
 public class heartLogo extends Image {
+    //botão do coração
 
-    subdefenderApp game;
+    private final subdefenderApp game;
+    public sound lifeEffect;
     public heartLogo(final subdefenderApp game)
     {
         super(new Texture("heart.png"));
+        this.lifeEffect = new sound("sounds/518306__mrthenoronha__extra-life-8-bit.wav");
         this.setPosition(800,10);
         this.game = game;
         this.addListener(new ClickListener(){
                                            @Override
                                            public void clicked(InputEvent event, float x, float y) {
-                                               setTapCountInterval(1f);
+                                               setTapCountInterval(2f);
                                                if (game.getLifeCounter() > 0 && getTapCount()<2)
                                                {
                                                    heartLogo.this.addAction(Actions.sequence(
@@ -32,6 +32,9 @@ public class heartLogo extends Image {
                                                            Actions.moveBy(0, -10)
                                                    ));
                                                    game.setLifeCounter(game.getLifeCounter()-1);
+                                                   lifeEffect.setvolume(0.3f);
+                                                   lifeEffect.play();
+
                                                }
                                            }
                                        }

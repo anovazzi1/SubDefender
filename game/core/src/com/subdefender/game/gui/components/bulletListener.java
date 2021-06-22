@@ -1,19 +1,17 @@
 package com.subdefender.game.gui.components;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.subdefender.game.subdefenderApp;
 
-public class BulletListener extends ClickListener {
-
-    Image atual;
-    subdefenderApp game;
-    int i;
-    public BulletListener(Image atual, subdefenderApp game, int index)
+public class bulletListener extends ClickListener {
+// coordena a seleção das balas
+    private Image atual;
+    private final subdefenderApp game;
+    private int i;
+    public bulletListener(Image atual, subdefenderApp game, int index)
     {
         super();
         this.atual = atual;

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
 public class themeMusic {
+    //musica tema
 
     private static Music theme;
 
@@ -11,6 +12,7 @@ public class themeMusic {
         theme = Gdx.audio.newMusic(Gdx.files.
                 internal("sounds/516076__breviceps__pirate-band-performs-drunken-sailor.wav"));
         theme.setLooping(true);
+        theme.setVolume(0.5f);
         theme.play();
     }
 

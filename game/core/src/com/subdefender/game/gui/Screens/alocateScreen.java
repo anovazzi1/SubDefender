@@ -14,7 +14,7 @@ import com.subdefender.game.subdefenderApp;
 
 public class alocateScreen implements Screen {
 
-    private subdefenderApp game;
+    private final subdefenderApp game;
     private smallTitle title;
     private Stage stage;
     private inputCord inputCordenate;
@@ -26,7 +26,7 @@ public class alocateScreen implements Screen {
     public alocateScreen(final subdefenderApp game)
     {
         this.game = game;
-        inputCordenate = new inputCord("", game.skin);
+        inputCordenate = new inputCord("", game.skin,0,0);
         inputButton = new buttons(game);
         subs = new submarines(game);
         title = new smallTitle();
@@ -48,8 +48,10 @@ public class alocateScreen implements Screen {
                                             public void clicked(InputEvent event, float x, float y){
                                                 subCords = inputCordenate.getText();
                                                 System.out.println(subCords);
+                                                //inserir verificação das coordenadas do navio
                                                 game.subCords[counter] = subCords;
                                                 counter++;
+                                                inputCordenate.setText("");
 
                                             }
                                         }
@@ -63,6 +65,7 @@ public class alocateScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
         stage.draw();
+        //informações estaticas na tela
         game.batch.begin();
         game.pixel.draw(game.batch,"tamanhos:",10,590);
         game.pixel.draw(game.batch,"1",140,530);
@@ -73,6 +76,7 @@ public class alocateScreen implements Screen {
         game.batch.end();
         if (counter==5)
         {
+            //muda de tela
             game.setScreen(game.battleship);
         }
 

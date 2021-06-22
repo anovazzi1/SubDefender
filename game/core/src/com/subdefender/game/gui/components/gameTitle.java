@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 public class gameTitle extends Image {
 
 
+    //imagem do titulo do jogo
     public gameTitle()
     {
         super(new Texture("titulo_800_200px_1.png"));

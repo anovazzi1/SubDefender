@@ -5,19 +5,17 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.subdefender.game.gui.components.buttons;
 import com.subdefender.game.gui.components.gameTitle;
 import com.subdefender.game.gui.components.nameField;
-import com.subdefender.game.gui.components.themeMusic;
 import com.subdefender.game.subdefenderApp;
 
 
 
 public class inputScreen implements Screen {
 
-    private subdefenderApp game;
+    private final subdefenderApp game;
     private gameTitle title;
     private Stage stage;
     private nameField nameInput;
@@ -42,6 +40,7 @@ public class inputScreen implements Screen {
     public void show() {
         initButtons();
         Gdx.input.setInputProcessor(stage);
+        //captura o nome do jogador e prende a variavel game.playerName
         inputButton.iniciar.addListener(new ClickListener(){
                                           @Override
                                           public void clicked(InputEvent event, float x, float y){

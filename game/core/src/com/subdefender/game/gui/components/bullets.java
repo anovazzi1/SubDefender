@@ -1,26 +1,17 @@
 package com.subdefender.game.gui.components;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.RemoveAction;
-import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Array;
 import com.subdefender.game.subdefenderApp;
 
-import java.util.ArrayList;
-
-public class Bullets {
+public class bullets {
+    //imagem das balas
     private Image[] copia;
     private Image[] bullets = new Image[3];
-    private BulletListener listener;
+    private bulletListener listener;
     private subdefenderApp game;
-    public Bullets(subdefenderApp game) {
+    public bullets(subdefenderApp game) {
         this.game = game;
         bullets[0] = new Image(new Texture("bala_comum.png"));
         bullets[0].setPosition(250, 10);
@@ -45,7 +36,7 @@ public class Bullets {
 
     private void createListeners() {
         for (int i = 0;i<3;i++){
-            listener = new BulletListener(copia[i],game,i);
+            listener = new bulletListener(copia[i],game,i);
             copia[i].addListener(listener);
         }
     }

@@ -12,6 +12,7 @@ public class submarines {
 
     public submarines(subdefenderApp game)
     {
+        //imagens dos submarinos que somem conforme são destruidos em batalha
         this.game = game;
         sub = new Image[5];
         sub[0] = new Image(new Texture("sub_1.png"));

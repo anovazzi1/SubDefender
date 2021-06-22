@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 public class nameField extends TextField {
     public nameField(String text, Skin skin) {
+        //caixa de texto para o nome
         super(text, skin);
         this.setPosition(400,260);
         this.setSize(250,50);

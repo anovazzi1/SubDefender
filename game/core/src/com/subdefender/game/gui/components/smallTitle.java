@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class smallTitle extends Image {
 
-
+    //versão menor do titulo do jogo
     public smallTitle()
     {
         super(new Texture("titulo_600_150px.png"));

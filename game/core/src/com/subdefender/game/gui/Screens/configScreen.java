@@ -14,7 +14,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveBy;
 
 public class configScreen implements Screen {
 
-    subdefenderApp game;
+    final private subdefenderApp game;
     private Image logo;
     private Stage stage;
     private buttons configurations;
@@ -34,6 +34,7 @@ public class configScreen implements Screen {
 
     @Override
     public void show() {
+        //animação do titulo
         Gdx.input.setInputProcessor(this.stage);
         logo.addAction(after(repeat(100,
                 sequence(moveBy(0,-40,1.7f),moveBy(0,40,1.7f)))));
@@ -47,7 +48,7 @@ public class configScreen implements Screen {
         stage.act();
         stage.draw();
         game.batch.begin();
-        game.pixel.draw(game.batch,"Dificulade Atual",20,320);
+        game.pixel.draw(game.batch,"Dificuldade Atual",20,320);
         game.batch.end();
 
     }
@@ -78,6 +79,7 @@ public class configScreen implements Screen {
     }
 
     public void initButtons(){
+        //inicializa os botões
         configurations.dificultButton();
         configurations.soundController();
         configurations.backButton();

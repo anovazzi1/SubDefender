@@ -13,6 +13,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class welcomeScreen implements Screen {
 
+    //config iniciais da tela
     private final subdefenderApp game;
     private Stage stage;
     private gameTitle logo;
@@ -33,6 +34,7 @@ public class welcomeScreen implements Screen {
         if(game.getisMusicPlaying()) {
             themeMusic.play();
         }
+        //animacao do logo
         logo.addAction(sequence(alpha(0),
                 parallel(moveBy(0,40,1.7f),fadeIn(1.7f))));
         logo.addAction(after(repeat(100,
@@ -42,6 +44,7 @@ public class welcomeScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        //função que atualiza a GUI
         Gdx.gl.glClearColor(0,0,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
@@ -79,6 +82,7 @@ public class welcomeScreen implements Screen {
     }
 
     private void initButton() {
+        //inicia e adiciona os botões à tela
         menuButtons.playButton();
         menuButtons.exitButton();
         menuButtons.configButton();
