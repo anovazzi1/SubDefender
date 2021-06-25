@@ -27,7 +27,7 @@ public class subdefenderApp extends Game {
 	//fonte usada no jogo
 	public BitmapFont pixel;
 	//string que contem o nome do jogador
-	public String playerName;
+	private String playerName;
 	//telas do jogo
 	public Screen firstScreen;
 	public Screen nameScreen;
@@ -37,9 +37,9 @@ public class subdefenderApp extends Game {
 	// estado da musica do jogo
 	private boolean isMusicPlaying = true;
 	//dificuldade do jogo
-	private int dificult=1;
+	private int dificult = 0;
 	//numero de vidas
-	private int lifeCounter= 5;
+	private int lifeCounter = 10;
 	//vetor com situação dos submarinos True: vivo, Falso:morto.
 	private boolean[] subStatus;
 	//vetor que mostra qual bala foi selecionada
@@ -55,18 +55,18 @@ public class subdefenderApp extends Game {
 	public GridTest testeB;
 
 	@Override
-	public void create () {
+	public void create() {
 		//inicializador do EventListener
 		inicializador.setGame(this);
 		//configurações iniciais
 		camera = new OrthographicCamera();
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false,480,720);
+		camera.setToOrtho(false, 480, 720);
 		batch = new SpriteBatch();
 		manager = new AssetManager();
 		//configurações da fonte
 		pixel = new BitmapFont(Gdx.files.internal("fonts/Pixeboy-z8XGD.ttf/Pixeboy-z8XGD.fnt"));
-		pixel.getData().setScale(1.5f,1.5f);
+		pixel.getData().setScale(1.5f, 1.5f);
 		skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 		// inicialzação dos dados que serão usados pelo backend
 		subStatus = new boolean[5];
@@ -77,7 +77,7 @@ public class subdefenderApp extends Game {
 		testeP = new GridTest(false);
 		initSubs();
 		initBullets();
-		initAmmo();
+		setDificult(0);
 		//inicialização das telas
 		nameScreen = new inputScreen(this);
 		firstScreen = new welcomeScreen(this);
@@ -89,13 +89,13 @@ public class subdefenderApp extends Game {
 	}
 
 	@Override
-	public void render () {
+	public void render() {
 		super.render();
 	}
 
-	
+
 	@Override
-	public void dispose () {
+	public void dispose() {
 		batch.dispose();
 		manager.dispose();
 		pixel.dispose();
@@ -119,6 +119,20 @@ public class subdefenderApp extends Game {
 	}
 
 	public void setDificult(int dificult) {
+		switch (dificult) {
+			case 2:
+				setLifeCounter(3);
+				setAmmo(30, 0, 0);
+				break;
+			case 1:
+				setLifeCounter(5);
+				setAmmo(60, 1, 0);
+				break;
+			default:
+				setLifeCounter(10);
+				setAmmo(100, 1, 1);
+				break;
+		}
 		this.dificult = dificult;
 	}
 
@@ -139,14 +153,9 @@ public class subdefenderApp extends Game {
 		this.subStatus[index] = status;
 	}
 
-	public int getSelectedBullet()
-	{
-
-
-		for(int i = 0;i< selectedBullet.length;i++)
-		{
-			if(selectedBullet[i])
-			{
+	public int getSelectedBullet() {
+		for (int i = 0; i < selectedBullet.length; i++) {
+			if (selectedBullet[i]) {
 				return i;
 			}
 		}
@@ -154,8 +163,7 @@ public class subdefenderApp extends Game {
 	}
 
 	public void setSelectedBullet(int index) {
-		for(int i =0;i<this.selectedBullet.length;i++)
-		{
+		for (int i = 0; i < this.selectedBullet.length; i++) {
 			this.selectedBullet[i] = false;
 		}
 		this.selectedBullet[index] = true;
@@ -165,35 +173,124 @@ public class subdefenderApp extends Game {
 		return ammo[i];
 	}
 
-	private void initSubs()
-	{
-		for(int i=0;i<5;i++) {
+	private void initSubs() {
+		for (int i = 0; i < 5; i++) {
 			this.subStatus[i] = true;
 		}
 	}
 
-	private void initBullets()
-	{
-		for(int i =0;i< selectedBullet.length;i++)
-		{
+	private void initBullets() {
+		for (int i = 0; i < selectedBullet.length; i++) {
 			this.selectedBullet[i] = false;
 		}
 		selectedBullet[0] = true;
 	}
+
 	//verificacao que sera mudada para o backend
-	private void initAmmo()
-	{
-		ammo[0] = 15;
-		ammo[1] = 8;
-		ammo[2] = 5;
+	private void setAmmo(int normal, int power1, int power2) {
+		ammo[0] = normal;
+		ammo[1] = power1;
+		ammo[2] = power2;
 	}
 
 	//verificação que sera mudada para o backend
-	public void updateAmmo()
-	{
-		if(ammo[getSelectedBullet()]>0){
+	public void updateAmmo() {
+		if (ammo[getSelectedBullet()] > 0) {
 			ammo[getSelectedBullet()]--;
 		}
 	}
 
+	public String getName() {
+		return this.playerName;
+	}
+
+	public void validateName(String playerName) {
+		if (playerName.length() > 17 || playerName.length() == 0) {
+			System.out.println("Nome muito grande ou nao foi inserido.");    //TODO - implementar o aviso de nome excedendo o limite de caracteres ou nome nao inserido
+			return;
+		}
+		this.playerName = playerName;
+		this.setScreen(this.alocate);
+	}
+
+	public boolean validateAlocateSub(String subCords, int tamanhoSub) {		//Valida as coordenadas para a alocacao dos submarinos
+		 if (validateCoord(subCords) && validarTamanhoCoords(subCords, tamanhoSub) && validarInterseccaoSubs(subCords, tamanhoSub)){
+			 return true;
+		}
+		return false;
+	}
+
+	private boolean validarInterseccaoSubs(String subCords, int tamanhoSub) {
+		//Coordenadas inicio
+		int inicioFila = Character.toUpperCase(subCords.charAt(0));
+		int inicioColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
+
+		//Coordenadas fim
+		int fimFila = Character.toUpperCase(subCords.charAt(0));
+		int fimColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
+
+		for (int i = 0; i < tamanhoSub; i++){
+			// Line AB represented as a1x + b1y = c1
+			double a1 = B.y - A.y;
+			double b1 = A.x - B.x;
+			double c1 = a1*(A.x) + b1*(A.y);
+
+			// Line CD represented as a2x + b2y = c2
+			double a2 = D.y - C.y;
+			double b2 = C.x - D.x;
+			double c2 = a2*(C.x)+ b2*(C.y);
+
+			double determinant = a1*b2 - a2*b1;
+
+			if (determinant == 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+				System.out.println("Coordenadas escolhidas interceptam um navio ja alocado. Tente Novamente!");	//TODO - Implementar aviso
+			}
+		}
+
+		return true;
+	}
+
+	public boolean validateCoord(String subCords){
+		try {
+			//Coordenadas inicio
+			int inicioFila = Character.toUpperCase(subCords.charAt(0));
+			int inicioColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
+
+			//Coordenadas fim
+			int fimFila = Character.toUpperCase(subCords.charAt(0));
+			int fimColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
+
+			if ((inicioFila < 'A' || inicioFila > 'J') || (inicioColuna < 0 || inicioColuna > 9) || (fimFila < 'A' || fimFila > 'J') || (fimColuna < 0 || fimColuna > 9)) {
+				System.out.println("Coordenadas além dos limites do tabuleiro. Tente Novamente!");	//TODO - implementar aviso
+				return false;
+			}
+		}catch (Exception e){
+			System.out.println("Coordenadas invalidas! Tente Novamente");	//TODO - Implementar aviso
+			return false;
+		}
+		return true;
+	}
+
+	public boolean validarTamanhoCoords(String subCords, int tamanhoSub) {
+		//Coordenadas inicio
+		int inicioFila = Character.toUpperCase(subCords.charAt(0));
+		int inicioColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
+
+		//Coordenadas fim
+		int fimFila = Character.toUpperCase(subCords.charAt(0));
+		int fimColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
+
+		if (inicioFila == fimFila || inicioColuna == fimColuna) {
+			return fimFila - inicioFila + 1 == tamanhoSub || fimColuna - inicioColuna + 1 == tamanhoSub;
+		}
+		else {
+			return false;
+		}
+	} //TODO  Implementar aviso
 }

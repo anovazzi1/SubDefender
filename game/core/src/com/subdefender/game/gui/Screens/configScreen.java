@@ -27,9 +27,6 @@ public class configScreen implements Screen {
         stage = new Stage();
         stage.addActor(logo);
         configurations = new buttons(game);
-
-
-
     }
 
     @Override
@@ -48,7 +45,7 @@ public class configScreen implements Screen {
         stage.act();
         stage.draw();
         game.batch.begin();
-        game.pixel.draw(game.batch,"Dificuldade Atual",20,320);
+        game.pixel.draw(game.batch,"Dificuldade Atual:",315,370);
         game.batch.end();
 
     }

@@ -82,7 +82,7 @@ public class gameScreen implements Screen {
         game.batch.begin();
         {
             game.pixel.draw(game.batch, "bot", 640, 500);
-            game.pixel.draw(game.batch, game.playerName, 240, 500);
+            game.pixel.draw(game.batch, game.getName(), 240, 500);
             game.pixel.draw(game.batch, "x", 890, 35);
             game.pixel.draw(game.batch, "x", 45, 35);
             game.pixel.draw(game.batch, "x", 160, 35);

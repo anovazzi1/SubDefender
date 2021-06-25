@@ -5,7 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.subdefender.game.gui.components.*;
 import com.subdefender.game.subdefenderApp;
@@ -34,8 +33,6 @@ public class alocateScreen implements Screen {
         stage.addActor(inputCordenate);
         stage.addActor(title);
         subs.addActors(stage);
-
-
     }
 
     @Override
@@ -47,12 +44,11 @@ public class alocateScreen implements Screen {
                                             @Override
                                             public void clicked(InputEvent event, float x, float y){
                                                 subCords = inputCordenate.getText();
-                                                System.out.println(subCords);
-                                                //inserir verificação das coordenadas do navio
-                                                game.subCords[counter] = subCords;
-                                                counter++;
+                                                if(game.validateAlocateSub(subCords, counter+1)){
+                                                    game.subCords[counter] = subCords;
+                                                    counter++;
+                                                }
                                                 inputCordenate.setText("");
-
                                             }
                                         }
         );
@@ -67,7 +63,8 @@ public class alocateScreen implements Screen {
         stage.draw();
         //informações estaticas na tela
         game.batch.begin();
-        game.pixel.draw(game.batch,"tamanhos:",10,590);
+        game.pixel.draw(game.batch,"",315,370);
+       //TODO - Adicionar instrucoes sobre o formato de entrada das coordenadas e mostrar apenas o submarino a ser alocado game.pixel.draw(game.batch,"Formato de entrada: ",10,590);
         game.pixel.draw(game.batch,"1",140,530);
         game.pixel.draw(game.batch,"2",150,430);
         game.pixel.draw(game.batch,"3",180,330);

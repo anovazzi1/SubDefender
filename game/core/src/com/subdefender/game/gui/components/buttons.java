@@ -20,7 +20,7 @@ public class buttons {
     public TextButton soundController;
     public TextButton back;
     public TextButton alocate;
-    static private String Atual = "normal";
+    static private String Atual = "facil";
     public TextButton shoot;
 
     public buttons(subdefenderApp game)
@@ -91,7 +91,7 @@ public class buttons {
     {
         //botão que seleciona a dificuldade
         level = new TextButton(Atual,skin,"default");
-        level.setPosition(400,260);
+        level.setPosition(400,210);
         level.setSize(200,100);
         level.addListener(new ClickListener(){
                                         @Override
@@ -143,7 +143,7 @@ public class buttons {
     {
         //botão que controla o som da musica tema
         soundController = new TextButton("som",skin,"default");
-        soundController.setPosition(400,120);
+        soundController.setPosition(400,70);
         soundController.setSize(200,100);
         soundController.addListener(new ClickListener(){
                                @Override
