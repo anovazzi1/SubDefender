@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.subdefender.game.gui.components.buttons;
 import com.subdefender.game.gui.components.gameTitle;
+import com.subdefender.game.gui.components.nameError;
 import com.subdefender.game.gui.components.nameField;
 import com.subdefender.game.subdefenderApp;
 
@@ -21,6 +22,7 @@ public class inputScreen implements Screen {
     private nameField nameInput;
     private String playerName;
     private buttons inputButton;
+    private nameError erro = new nameError();
 
 
     public inputScreen(final subdefenderApp game)
@@ -32,6 +34,7 @@ public class inputScreen implements Screen {
         stage = new Stage();
         stage.addActor(nameInput);
         stage.addActor(title);
+        stage.addActor(erro);
 
 
     }
@@ -45,7 +48,15 @@ public class inputScreen implements Screen {
                                           @Override
                                           public void clicked(InputEvent event, float x, float y){
                                               playerName = nameInput.getText();
-                                              game.validateName(playerName);
+                                              if(game.validateName(playerName))
+                                              {
+                                                  game.setPlayerName(playerName);
+                                                  game.setScreen(game.alocate);
+                                              }
+                                              else{
+                                                  erro.showError();
+                                                  nameInput.setText("");
+                                              }
                                           }
                                       }
         );

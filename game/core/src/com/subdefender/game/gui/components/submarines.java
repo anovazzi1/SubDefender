@@ -31,6 +31,21 @@ public class submarines {
         sub[4].setScale(0.9f,0.8f);
     }
 
+    public void checkInput ()
+    {
+        for(int i =0;i<5;i++){
+            if(!game.alocateSubs[i])
+            {
+                sub[i].addAction(Actions.fadeOut(1));
+            }
+            else
+            {
+                sub[i].addAction(Actions.fadeIn(1f));
+            }
+        }
+    }
+
+
     public void checkStatus()
     {
         for(int i =0;i<5;i++){
@@ -40,6 +55,7 @@ public class submarines {
             }
         }
     }
+
 
     public void addActors(Stage stage)
     {

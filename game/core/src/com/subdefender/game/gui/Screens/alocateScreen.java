@@ -3,17 +3,21 @@ package com.subdefender.game.gui.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.subdefender.game.gui.components.*;
 import com.subdefender.game.subdefenderApp;
 
 
 
+
 public class alocateScreen implements Screen {
 
     private final subdefenderApp game;
+    private Image sample;
     private smallTitle title;
     private Stage stage;
     private inputCord inputCordenate;
@@ -21,10 +25,13 @@ public class alocateScreen implements Screen {
     private buttons inputButton;
     private submarines subs;
     private int counter=0;
+    private erroCordInvalida erro = new erroCordInvalida();
+
 
     public alocateScreen(final subdefenderApp game)
     {
         this.game = game;
+        sample = new sampleGrid();
         inputCordenate = new inputCord("", game.skin,0,0);
         inputButton = new buttons(game);
         subs = new submarines(game);
@@ -33,6 +40,8 @@ public class alocateScreen implements Screen {
         stage.addActor(inputCordenate);
         stage.addActor(title);
         subs.addActors(stage);
+        stage.addActor(erro);
+        stage.addActor(sample);
     }
 
     @Override
@@ -46,9 +55,14 @@ public class alocateScreen implements Screen {
                                                 subCords = inputCordenate.getText();
                                                 if(game.validateAlocateSub(subCords, counter+1)){
                                                     game.subCords[counter] = subCords;
+                                                    if(counter<4){
+                                                    game.alocateSubs[counter+1] = true;
+                                                    }
                                                     counter++;
                                                 }
+                                                erro.showError();
                                                 inputCordenate.setText("");
+
                                             }
                                         }
         );
@@ -60,10 +74,11 @@ public class alocateScreen implements Screen {
         Gdx.gl.glClearColor(0,0,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
+        subs.checkInput();
         stage.draw();
         //informações estaticas na tela
         game.batch.begin();
-        game.pixel.draw(game.batch,"",315,370);
+        game.pixel.draw(game.batch,"exemplo A1;A2",400,400);
        //TODO - Adicionar instrucoes sobre o formato de entrada das coordenadas e mostrar apenas o submarino a ser alocado game.pixel.draw(game.batch,"Formato de entrada: ",10,590);
         game.pixel.draw(game.batch,"1",140,530);
         game.pixel.draw(game.batch,"2",150,430);

@@ -53,6 +53,7 @@ public class subdefenderApp extends Game {
 	//ponteiros para matriz real que armazena as coordenadas
 	public GridTest testeP;
 	public GridTest testeB;
+	public boolean[] alocateSubs;
 
 	@Override
 	public void create() {
@@ -71,11 +72,13 @@ public class subdefenderApp extends Game {
 		// inicialzação dos dados que serão usados pelo backend
 		subStatus = new boolean[5];
 		selectedBullet = new boolean[3];
+		alocateSubs = new boolean[5];
 		ammo = new int[3];
 		subCords = new String[5];
 		testeB = new GridTest(true);
 		testeP = new GridTest(false);
 		initSubs();
+		initalocate();
 		initBullets();
 		setDificult(0);
 		//inicialização das telas
@@ -179,6 +182,13 @@ public class subdefenderApp extends Game {
 		}
 	}
 
+	private void initalocate() {
+		for (int i = 0; i < 5; i++) {
+			this.alocateSubs[i] = false;
+		}
+		alocateSubs[0] = true;
+	}
+
 	private void initBullets() {
 		for (int i = 0; i < selectedBullet.length; i++) {
 			this.selectedBullet[i] = false;
@@ -204,54 +214,57 @@ public class subdefenderApp extends Game {
 		return this.playerName;
 	}
 
-	public void validateName(String playerName) {
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+
+	public boolean validateName(String playerName) {
 		if (playerName.length() > 17 || playerName.length() == 0) {
 			System.out.println("Nome muito grande ou nao foi inserido.");    //TODO - implementar o aviso de nome excedendo o limite de caracteres ou nome nao inserido
-			return;
+			return false;
 		}
-		this.playerName = playerName;
-		this.setScreen(this.alocate);
+		return true;
 	}
 
 	public boolean validateAlocateSub(String subCords, int tamanhoSub) {		//Valida as coordenadas para a alocacao dos submarinos
-		 if (validateCoord(subCords) && validarTamanhoCoords(subCords, tamanhoSub) && validarInterseccaoSubs(subCords, tamanhoSub)){
-			 return true;
-		}
-		return false;
+//		 if (validateCoord(subCords) && validarTamanhoCoords(subCords, tamanhoSub) && validarInterseccaoSubs(subCords, tamanhoSub)){
+//			 return true;
+//		}
+		return true;
 	}
 
 	private boolean validarInterseccaoSubs(String subCords, int tamanhoSub) {
-		//Coordenadas inicio
-		int inicioFila = Character.toUpperCase(subCords.charAt(0));
-		int inicioColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
-
-		//Coordenadas fim
-		int fimFila = Character.toUpperCase(subCords.charAt(0));
-		int fimColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
-
-		for (int i = 0; i < tamanhoSub; i++){
-			// Line AB represented as a1x + b1y = c1
-			double a1 = B.y - A.y;
-			double b1 = A.x - B.x;
-			double c1 = a1*(A.x) + b1*(A.y);
-
-			// Line CD represented as a2x + b2y = c2
-			double a2 = D.y - C.y;
-			double b2 = C.x - D.x;
-			double c2 = a2*(C.x)+ b2*(C.y);
-
-			double determinant = a1*b2 - a2*b1;
-
-			if (determinant == 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-				System.out.println("Coordenadas escolhidas interceptam um navio ja alocado. Tente Novamente!");	//TODO - Implementar aviso
-			}
-		}
+//		//Coordenadas inicio
+//		int inicioFila = Character.toUpperCase(subCords.charAt(0));
+//		int inicioColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
+//
+//		//Coordenadas fim
+//		int fimFila = Character.toUpperCase(subCords.charAt(0));
+//		int fimColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
+//
+//		for (int i = 0; i < tamanhoSub; i++){
+//			// Line AB represented as a1x + b1y = c1
+//			double a1 = B.y - A.y;
+//			double b1 = A.x - B.x;
+//			double c1 = a1*(A.x) + b1*(A.y);
+//
+//			// Line CD represented as a2x + b2y = c2
+//			double a2 = D.y - C.y;
+//			double b2 = C.x - D.x;
+//			double c2 = a2*(C.x)+ b2*(C.y);
+//
+//			double determinant = a1*b2 - a2*b1;
+//
+//			if (determinant == 0)
+//			{
+//				return true;
+//			}
+//			else
+//			{
+//				return false;
+//				System.out.println("Coordenadas escolhidas interceptam um navio ja alocado. Tente Novamente!");	//TODO - Implementar aviso
+//			}
+//		}
 
 		return true;
 	}
