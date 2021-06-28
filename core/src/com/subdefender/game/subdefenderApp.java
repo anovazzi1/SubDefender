@@ -345,7 +345,7 @@ public class subdefenderApp extends Game {
 		int fila = getRandomNumber(10);
 		int coluna = getRandomNumber(10);
 
-		while (PlayerMap.getVisible(fila, coluna) || !validateCoord(fila, coluna)) {
+		while (PlayerMap.getAtingido(fila, coluna) || !validateCoord(fila, coluna)) {
 			fila = getRandomNumber(10);
 			coluna = getRandomNumber(10);
 		}
@@ -363,21 +363,21 @@ public class subdefenderApp extends Game {
 		if (inicioFila == fimFila) {    //Vertical
 			for (int i = 0; i < subSize; i++){
 				if(inicioColuna > fimColuna){ i = -1*i; }
-				BotMap.setOcupado(inicioFila, inicioColuna+i, true);
-				BotMap.setTipo(inicioFila, inicioColuna+i, 3);
-				BotMap.setAtingido(inicioFila, inicioColuna+i, false);
-				BotMap.setRevivido(inicioFila, inicioColuna+i, true);
-				BotMap.setVisible(inicioFila, inicioColuna+i, true);
+				PlayerMap.setOcupado(inicioFila, inicioColuna+i, true);
+				PlayerMap.setTipo(inicioFila, inicioColuna+i, 3);
+				PlayerMap.setAtingido(inicioFila, inicioColuna+i, false);
+				PlayerMap.setRevivido(inicioFila, inicioColuna+i, true);
+				PlayerMap.setVisible(inicioFila, inicioColuna+i, true);
 			}
 		}else {      //Horizontal
 			for (int i = 0; i < subSize; i++){
 				if(inicioFila > fimFila){ i = -1*i; }
-				BotMap.setOcupado(inicioFila+i, inicioColuna, true);
-				BotMap.setTipo(inicioFila+i, inicioColuna, 3);
-				BotMap.setAtingido(inicioFila, inicioColuna+i, false);
-				BotMap.setRevivido(inicioFila, inicioColuna+i, true);
-				BotMap.setTipo(inicioFila+i, inicioColuna, 3);
-				BotMap.setVisible(inicioFila, inicioColuna+i, true);
+				PlayerMap.setOcupado(inicioFila+i, inicioColuna, true);
+				PlayerMap.setTipo(inicioFila+i, inicioColuna, 3);
+				PlayerMap.setAtingido(inicioFila, inicioColuna+i, false);
+				PlayerMap.setRevivido(inicioFila, inicioColuna+i, true);
+				PlayerMap.setTipo(inicioFila+i, inicioColuna, 3);
+				PlayerMap.setVisible(inicioFila, inicioColuna+i, true);
 			}
 		}
 	}
