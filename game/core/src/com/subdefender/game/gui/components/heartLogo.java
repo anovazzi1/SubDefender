@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.subdefender.game.itens.Submarinos;
 import com.subdefender.game.subdefenderApp;
 
 public class heartLogo extends Image {
@@ -25,15 +26,22 @@ public class heartLogo extends Image {
                                                setTapCountInterval(2f);
                                                if (game.getLifeCounter() > 0 && getTapCount()<2)
                                                {
-                                                   heartLogo.this.addAction(Actions.sequence(
-                                                           Actions.moveBy(0, 10),
-                                                           Actions.fadeOut(0.5f),
-                                                           Actions.fadeIn(0.5f),
-                                                           Actions.moveBy(0, -10)
-                                                   ));
-                                                   game.setLifeCounter(game.getLifeCounter()-1);
-                                                   lifeEffect.setvolume(0.3f);
-                                                   lifeEffect.play();
+                                                   for (Submarinos submarino: game.jogador.submarinos) {
+                                                       if(!submarino.getVivo()){
+                                                           heartLogo.this.addAction(Actions.sequence(
+                                                                   Actions.moveBy(0, 10),
+                                                                   Actions.fadeOut(0.5f),
+                                                                   Actions.fadeIn(0.5f),
+                                                                   Actions.moveBy(0, -10)
+                                                           ));
+                                                           game.setLifeCounter(game.getLifeCounter()-1);
+                                                           lifeEffect.setvolume(0.3f);
+                                                           lifeEffect.play();
+                                                           submarino.setVivo(true);
+                                                          game.setRevivido(submarino.getSize(), submarino.getFilaInicio(), submarino.getColunaInicio(), submarino.getFilaFim(), submarino.getColunaFim());
+                                                          break;
+                                                       }
+                                                   }
 
                                                }
                                            }

@@ -23,8 +23,9 @@ public class gameScreen implements Screen {
     private cordTemplate cordenadas;
     private inputCord cordTiro;
     private buttons shootButton;
-    private String tiro;
+    private int[] tiroCord = new int[2];
     private sound shootSound;
+    private erroCordInvalida erro = new erroCordInvalida(430, 30);
 
     public gameScreen(subdefenderApp game)
     {
@@ -49,7 +50,6 @@ public class gameScreen implements Screen {
         stage.addActor(heart);
         subs.addActors(stage);
         balas.addActors(stage);
-
     }
 
 
@@ -59,12 +59,22 @@ public class gameScreen implements Screen {
         shootButton.shoot.addListener(new ClickListener(){
                                             @Override
                                             public void clicked(InputEvent event, float x, float y){
-                                                 tiro = cordTiro.getText();
-                                                System.out.println(tiro);
-                                                game.tiros = tiro;
+                                                if (tratarCoord(cordTiro.getText()) && game.validateCoord(tiroCord[0], tiroCord[1])){
+                                                    System.out.println(tiroCord);
+                                                    if(game.playerShot(tiroCord[0], tiroCord[1])){
+                                                        shootSound.play();
+                                                        if(game.botShot()){
+                                                            shootSound.play();
+                                                        }
+                                                        game.krakenAttack();
+                                                    }
+
+                                                    erro.setVisible(false);
+                                                }else {
+                                                    erro.showError();   //TODO - coordenadas de tiro invalidas
+                                                }
                                                 cordTiro.setText("");
-                                                shootSound.play();
-                                                //verificação do tiro
+
                                             }
                                         }
         );
@@ -82,7 +92,7 @@ public class gameScreen implements Screen {
         game.batch.begin();
         {
             game.pixel.draw(game.batch, "bot", 640, 500);
-            game.pixel.draw(game.batch, game.getName(), 240, 500);
+            game.pixel.draw(game.batch, game.getPlayerName(), 240, 500);
             game.pixel.draw(game.batch, "x", 890, 35);
             game.pixel.draw(game.batch, "x", 45, 35);
             game.pixel.draw(game.batch, "x", 160, 35);
@@ -122,5 +132,21 @@ public class gameScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+    private boolean tratarCoord(String tiroCord){
+        try {
+            //Coordenadas inicio
+            int Fila = Character.toUpperCase(tiroCord.charAt(0))%65;
+            int Coluna = Integer.parseInt(String.valueOf(tiroCord.charAt(1)));
+
+            this.tiroCord[0] = Fila;
+            this.tiroCord[1] = Coluna;
+
+            return true;
+        }catch (Exception e){
+            System.out.println("Coordenadas invalidas! Tente Novamente");
+            return false;
+        }
     }
 }

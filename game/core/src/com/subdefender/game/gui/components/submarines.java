@@ -34,7 +34,7 @@ public class submarines {
     public void checkInput ()
     {
         for(int i =0;i<5;i++){
-            if(!game.alocateSubs[i])
+            if(!game.isSubAlocado(i))
             {
                 sub[i].addAction(Actions.fadeOut(1));
             }
@@ -49,7 +49,7 @@ public class submarines {
     public void checkStatus()
     {
         for(int i =0;i<5;i++){
-            if(!game.getSubStatus(i))
+            if(!game.isSubAlocado(i))
             {
                 sub[i].addAction(Actions.fadeOut(1f));
             }

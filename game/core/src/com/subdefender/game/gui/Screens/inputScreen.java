@@ -48,9 +48,7 @@ public class inputScreen implements Screen {
                                           @Override
                                           public void clicked(InputEvent event, float x, float y){
                                               playerName = nameInput.getText();
-                                              if(game.validateName(playerName))
-                                              {
-                                                  game.setPlayerName(playerName);
+                                              if (game.setPlayerName(playerName)){
                                                   game.setScreen(game.alocate);
                                               }
                                               else{

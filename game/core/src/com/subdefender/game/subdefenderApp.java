@@ -8,9 +8,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.subdefender.game.Players.Bot;
+import com.subdefender.game.Players.Player;
 import com.subdefender.game.gui.Screens.*;
-import com.subdefender.game.gui.components.GridTest;
+import com.subdefender.game.itens.Submarinos;
+import com.subdefender.game.map.Mapa;
 import com.subdefender.game.gui.components.inicializador;
+
+import static java.lang.Math.abs;
 
 public class subdefenderApp extends Game {
 
@@ -26,60 +31,49 @@ public class subdefenderApp extends Game {
 	public OrthographicCamera camera;
 	//fonte usada no jogo
 	public BitmapFont pixel;
-	//string que contem o nome do jogador
-	private String playerName;
+
+
 	//telas do jogo
 	public Screen firstScreen;
 	public Screen nameScreen;
 	public Screen battleship;
 	public Screen settings;
 	public Screen alocate;
+
 	// estado da musica do jogo
 	private boolean isMusicPlaying = true;
+
 	//dificuldade do jogo
 	private int dificult = 0;
-	//numero de vidas
-	private int lifeCounter = 10;
-	//vetor com situação dos submarinos True: vivo, Falso:morto.
-	private boolean[] subStatus;
-	//vetor que mostra qual bala foi selecionada
-	private boolean[] selectedBullet;
-	//vetor com o numero de balas de cada bala
-	private int[] ammo;
-	//coordenadas de cada submarino no mar
-	public String[] subCords;
-	//string com coordenada do tiro
-	public String tiros;
-	//ponteiros para matriz real que armazena as coordenadas
-	public GridTest testeP;
-	public GridTest testeB;
-	public boolean[] alocateSubs;
+
+	public Player jogador;
+	public Bot bot;
+
+	public Mapa PlayerMap;
+	public Mapa BotMap;
 
 	@Override
 	public void create() {
 		//inicializador do EventListener
 		inicializador.setGame(this);
+
 		//configurações iniciais
 		camera = new OrthographicCamera();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 480, 720);
 		batch = new SpriteBatch();
 		manager = new AssetManager();
+
 		//configurações da fonte
 		pixel = new BitmapFont(Gdx.files.internal("fonts/Pixeboy-z8XGD.ttf/Pixeboy-z8XGD.fnt"));
 		pixel.getData().setScale(1.5f, 1.5f);
 		skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
+
 		// inicialzação dos dados que serão usados pelo backend
-		subStatus = new boolean[5];
-		selectedBullet = new boolean[3];
-		alocateSubs = new boolean[5];
-		ammo = new int[3];
-		subCords = new String[5];
-		testeB = new GridTest(true);
-		testeP = new GridTest(false);
-		initSubs();
-		initalocate();
-		initBullets();
+		jogador = new Player();
+		bot = new Bot();
+		BotMap = new Mapa(true);
+		PlayerMap = new Mapa(false);
 		setDificult(0);
 		//inicialização das telas
 		nameScreen = new inputScreen(this);
@@ -111,7 +105,6 @@ public class subdefenderApp extends Game {
 	public boolean getisMusicPlaying() {
 		return isMusicPlaying;
 	}
-
 	public void setMusicPlaying(boolean musicPlaying) {
 		this.isMusicPlaying = musicPlaying;
 	}
@@ -120,7 +113,6 @@ public class subdefenderApp extends Game {
 	public int getDificult() {
 		return dificult;
 	}
-
 	public void setDificult(int dificult) {
 		switch (dificult) {
 			case 2:
@@ -139,171 +131,323 @@ public class subdefenderApp extends Game {
 		this.dificult = dificult;
 	}
 
-	public int getLifeCounter() {
-		return lifeCounter;
-	}
+	public int getLifeCounter() { return this.jogador.getLifeCounter(); }
+	public void setLifeCounter(int lifeCounter) { this.jogador.setLifeCounter(lifeCounter); }
 
-	public void setLifeCounter(int lifeCounter) {
-		this.lifeCounter = lifeCounter;
+	public boolean isSubAlocado(int index) {
+		return this.jogador.isSubAlocado(index);
 	}
-
-	public boolean getSubStatus(int index) {
-		return subStatus[index];
-	}
-
-	//verificacao que sera mudada para o backend
-	public void setSubStatus(boolean status, int index) {
-		this.subStatus[index] = status;
+	public void alocateSubs(int index, int[] subCords) {
+		this.PlayerMap.alocateSub(index+1, subCords, false);
+		this.BotMap.alocateSub(index+1, subCords, true); ////////////////////////////
+		this.jogador.alocateSub(index,subCords);
+		this.bot.alocateSub(index,subCords);
 	}
 
 	public int getSelectedBullet() {
-		for (int i = 0; i < selectedBullet.length; i++) {
-			if (selectedBullet[i]) {
-				return i;
-			}
-		}
-		return 404;
+		return this.jogador.getSelectedBullet();
 	}
-
 	public void setSelectedBullet(int index) {
-		for (int i = 0; i < this.selectedBullet.length; i++) {
-			this.selectedBullet[i] = false;
-		}
-		this.selectedBullet[index] = true;
+		this.jogador.setSelectedBullet(index);
 	}
-
 	public int getAmmo(int i) {
-		return ammo[i];
+		return this.jogador.balas[i].getQuantidade();
 	}
-
-	private void initSubs() {
-		for (int i = 0; i < 5; i++) {
-			this.subStatus[i] = true;
-		}
-	}
-
-	private void initalocate() {
-		for (int i = 0; i < 5; i++) {
-			this.alocateSubs[i] = false;
-		}
-		alocateSubs[0] = true;
-	}
-
-	private void initBullets() {
-		for (int i = 0; i < selectedBullet.length; i++) {
-			this.selectedBullet[i] = false;
-		}
-		selectedBullet[0] = true;
-	}
-
-	//verificacao que sera mudada para o backend
 	private void setAmmo(int normal, int power1, int power2) {
-		ammo[0] = normal;
-		ammo[1] = power1;
-		ammo[2] = power2;
+		this.jogador.balas[0].setQuantidade(normal);
+		this.jogador.balas[0].setPoder(0);
+
+		this.jogador.balas[1].setQuantidade(power1);
+		this.jogador.balas[1].setPoder(1);
+
+		this.jogador.balas[2].setQuantidade(power2);
+		this.jogador.balas[2].setPoder(2);
 	}
 
-	//verificação que sera mudada para o backend
-	public void updateAmmo() {
-		if (ammo[getSelectedBullet()] > 0) {
-			ammo[getSelectedBullet()]--;
+	public String getPlayerName() {
+		return this.jogador.getPlayerName();
+	}
+	public boolean setPlayerName(String playerName) {
+		if (this.jogador.validateName(playerName)){
+			this.jogador.setPlayerName(playerName);
+			return true;
 		}
+
+		return false;
 	}
 
-	public String getName() {
-		return this.playerName;
-	}
-
-	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
-	}
-
-	public boolean validateName(String playerName) {
-		if (playerName.length() > 17 || playerName.length() == 0) {
-			System.out.println("Nome muito grande ou nao foi inserido.");    //TODO - implementar o aviso de nome excedendo o limite de caracteres ou nome nao inserido
-			return false;
+	public boolean validateAlocateSub(int[] subCords, int tamanhoSub) {		//Valida as coordenadas para a alocacao dos submarinos
+		 if (validateCoord(subCords) && validarTamanhoCoords(subCords, tamanhoSub)){
+			 return true;
 		}
-		return true;
+		return false;
 	}
 
-	public boolean validateAlocateSub(String subCords, int tamanhoSub) {		//Valida as coordenadas para a alocacao dos submarinos
-//		 if (validateCoord(subCords) && validarTamanhoCoords(subCords, tamanhoSub) && validarInterseccaoSubs(subCords, tamanhoSub)){
-//			 return true;
-//		}
-		return true;
-	}
-
-	private boolean validarInterseccaoSubs(String subCords, int tamanhoSub) {
-//		//Coordenadas inicio
-//		int inicioFila = Character.toUpperCase(subCords.charAt(0));
-//		int inicioColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
-//
-//		//Coordenadas fim
-//		int fimFila = Character.toUpperCase(subCords.charAt(0));
-//		int fimColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
-//
-//		for (int i = 0; i < tamanhoSub; i++){
-//			// Line AB represented as a1x + b1y = c1
-//			double a1 = B.y - A.y;
-//			double b1 = A.x - B.x;
-//			double c1 = a1*(A.x) + b1*(A.y);
-//
-//			// Line CD represented as a2x + b2y = c2
-//			double a2 = D.y - C.y;
-//			double b2 = C.x - D.x;
-//			double c2 = a2*(C.x)+ b2*(C.y);
-//
-//			double determinant = a1*b2 - a2*b1;
-//
-//			if (determinant == 0)
-//			{
-//				return true;
-//			}
-//			else
-//			{
-//				return false;
-//				System.out.println("Coordenadas escolhidas interceptam um navio ja alocado. Tente Novamente!");	//TODO - Implementar aviso
-//			}
-//		}
-
-		return true;
-	}
-
-	public boolean validateCoord(String subCords){
-		try {
+	public boolean validateCoord(int[] subCords){
 			//Coordenadas inicio
-			int inicioFila = Character.toUpperCase(subCords.charAt(0));
-			int inicioColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
+			int inicioFila = subCords[0];
+			int inicioColuna = subCords[1];
 
 			//Coordenadas fim
-			int fimFila = Character.toUpperCase(subCords.charAt(0));
-			int fimColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
+			int fimFila = subCords[2];
+			int fimColuna = subCords[3];
 
-			if ((inicioFila < 'A' || inicioFila > 'J') || (inicioColuna < 0 || inicioColuna > 9) || (fimFila < 'A' || fimFila > 'J') || (fimColuna < 0 || fimColuna > 9)) {
-				System.out.println("Coordenadas além dos limites do tabuleiro. Tente Novamente!");	//TODO - implementar aviso
+			if ((inicioFila < 0 || inicioFila > 9) || (inicioColuna < 0 || inicioColuna > 9) || (fimFila < 0 || fimFila > 9) || (fimColuna < 0 || fimColuna > 9)) {
+				System.out.println("Coordenadas além dos limites do tabuleiro. Tente Novamente!");
 				return false;
 			}
-		}catch (Exception e){
-			System.out.println("Coordenadas invalidas! Tente Novamente");	//TODO - Implementar aviso
-			return false;
-		}
+
 		return true;
 	}
+	public boolean validateCoord(int Fila, int Coluna){
+		if ((Fila < 0 || Fila > 9) || (Coluna < 0 || Coluna > 9)) {
+			System.out.println("Coordenadas além dos limites do tabuleiro. Tente Novamente!");
+			return false;
+		}
 
-	public boolean validarTamanhoCoords(String subCords, int tamanhoSub) {
+		return true;
+	}
+	public boolean validarTamanhoCoords(int[] subCords, int tamanhoSub) {
 		//Coordenadas inicio
-		int inicioFila = Character.toUpperCase(subCords.charAt(0));
-		int inicioColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
+		int inicioFila = subCords[0];
+		int inicioColuna = subCords[1];
 
 		//Coordenadas fim
-		int fimFila = Character.toUpperCase(subCords.charAt(0));
-		int fimColuna = Integer.parseInt(String.valueOf(subCords.charAt(1)));
+		int fimFila = subCords[2];
+		int fimColuna = subCords[3];
 
-		if (inicioFila == fimFila || inicioColuna == fimColuna) {
-			return fimFila - inicioFila + 1 == tamanhoSub || fimColuna - inicioColuna + 1 == tamanhoSub;
+		if (inicioFila == fimFila) {
+			return abs(fimColuna - inicioColuna) + 1 == tamanhoSub;
+		}else if (inicioColuna == fimColuna) {
+			return abs(fimFila - inicioFila) + 1 == tamanhoSub;
 		}
 		else {
 			return false;
 		}
-	} //TODO  Implementar aviso
+	}
+
+	public boolean playerShot(int fila, int coluna) {
+		if (!BotMap.getAtingido(fila, coluna) && jogador.balas[getSelectedBullet()].getQuantidade() > 0){
+			if (getSelectedBullet() == 0) {					//Bala Comum
+				validarTiro(fila, coluna);
+				jogador.balas[getSelectedBullet()].shot();
+
+			}else if (getSelectedBullet() == 2) {			//Tiro em Cruz
+				usarPoder(2, fila, coluna);
+
+			}else if (getSelectedBullet() == 1) {
+				usarPoder(1, fila, coluna);
+			}
+			return true;
+		}
+		else{
+			System.out.println("Tiro inválido");
+		}
+        return false;
+    }
+
+	private void usarPoder(int i, int fila, int coluna) {
+		if (i == 1) {
+			if(BotMap.getOcupado(fila,coluna)) BotMap.setVisible(fila, coluna, true);
+			if(BotMap.getOcupado(fila+1, coluna+1))BotMap.setVisible(fila+1, coluna+1, true);
+			if(BotMap.getOcupado(fila-1, coluna-1))BotMap.setVisible(fila-1, coluna-1, true);
+			if(BotMap.getOcupado(fila+1, coluna))BotMap.setVisible(fila+1, coluna, true);
+			if(BotMap.getOcupado(fila, coluna+1))BotMap.setVisible(fila, coluna+1, true);
+			if(BotMap.getOcupado(fila-1, coluna))BotMap.setVisible(fila-1, coluna, true);
+			if(BotMap.getOcupado(fila, coluna-1))BotMap.setVisible(fila, coluna-1, true);
+			jogador.balas[getSelectedBullet()].shot();
+
+		}else if (i == 2) {
+			validarTiro(fila, coluna);
+			validarTiro(fila+1, coluna);
+			validarTiro(fila, coluna+1);
+			validarTiro(fila-1, coluna);
+			validarTiro(fila, coluna-1);
+			jogador.balas[getSelectedBullet()].shot();
+		}
+	}
+
+	private void validarTiro(int fila, int coluna) {
+		if(BotMap.getOcupado(fila, coluna)){
+			if (BotMap.getTipo(fila, coluna)){
+				BotMap.setAtingido(fila, coluna, true);
+				for (Submarinos submarino: bot.submarinos) {
+					submarino.atingido(fila, coluna);
+				}
+			}
+		}
+		BotMap.setVisible(fila, coluna, true);
+	}
+
+	public boolean botShot(){
+		int[] coordinates = getBotShotCoord();
+		if(PlayerMap.getOcupado(coordinates[0], coordinates[1])){
+			if (PlayerMap.getTipo(coordinates[0], coordinates[1])){
+				PlayerMap.setAtingido(coordinates[0], coordinates[1], true);
+				for (Submarinos submarino: jogador.submarinos) {
+					submarino.atingido(coordinates[0], coordinates[1]);
+				}
+			}
+		}
+		PlayerMap.setVisible(coordinates[0], coordinates[1], true);
+		bot.setLastShot(coordinates[0], coordinates[1]);
+		return true;
+	}
+	public  int[] getBotShotCoord() {
+		int[] coordinates = new int[2];
+		if (bot.getLastShot()[0] != -1) {
+			int fila = bot.getLastShot()[0];
+			int coluna = bot.getLastShot()[1];
+
+			if (fila - 1 >= 0 && PlayerMap.getAtingido(fila - 1, coluna) || fila + 1 < 10 && PlayerMap.getAtingido(fila + 1, coluna)) {
+				while (fila > 0) {
+					fila--;
+					if (PlayerMap.getVisible(fila, coluna)) {
+						break;
+					}
+					if (!PlayerMap.getAtingido(fila, coluna) && !PlayerMap.getVisible(fila, coluna)) {
+						coordinates[0] = fila;
+						coordinates[1] = coluna;
+						return coordinates;
+					}
+				}
+				while (fila < 10) {
+					fila++;
+					if (PlayerMap.getVisible(fila, coluna)) {
+						break;
+					}
+					if (!PlayerMap.getAtingido(fila, coluna) && !PlayerMap.getVisible(fila, coluna)) {
+						coordinates[0] = fila;
+						coordinates[1] = coluna;
+						return coordinates;
+					}
+				}
+			}
+			else if (coluna - 1 >= 0 && PlayerMap.getAtingido(fila, coluna - 1) || coluna + 1 < 10 && PlayerMap.getAtingido(fila, coluna + 1)) {
+				while (coluna > 0) {
+					coluna--;
+					if (PlayerMap.getVisible(fila, coluna)) {
+						break;
+					}
+					if (!PlayerMap.getAtingido(fila, coluna) && !PlayerMap.getVisible(fila, coluna)) {
+						coordinates[0] = fila;
+						coordinates[1] = coluna;
+						return coordinates;
+					}
+				}
+				while (coluna < 10) {
+					coluna++;
+					if (PlayerMap.getVisible(fila, coluna)) {
+						break;
+					}
+					if (!PlayerMap.getAtingido(fila, coluna) && !PlayerMap.getVisible(fila, coluna)) {
+						coordinates[0] = fila;
+						coordinates[1] = coluna;
+						return coordinates;
+					}
+				}
+			}
+			else {
+				int choice = getRandomNumber(0, 5);
+
+				while (true) {
+					if (fila - 1 >= 0 && !PlayerMap.getVisible(fila - 1, coluna) && choice == 1) {
+						fila = fila - 1;
+						break;
+					} if (fila + 1 < 10 && !PlayerMap.getVisible(fila + 1, coluna) && choice == 2) {
+						fila = fila + 1;
+						break;
+					} if (coluna - 1 >= 0 && !PlayerMap.getVisible(fila, coluna - 1) && choice == 3) {
+						coluna = coluna - 1;
+						break;
+					} if (coluna + 1 < 10 && !PlayerMap.getVisible(fila, coluna + 1) && choice == 4) {
+						coluna = coluna + 1;
+						break;
+					}
+					choice = getRandomNumber(0, 5);
+				}
+			}
+			coordinates[0] = fila;
+			coordinates[1] = coluna;
+		}
+		else {
+			int fila = getRandomNumber(0, 10);
+			int coluna = getRandomNumber(0, 10);
+
+			while (PlayerMap.getVisible(fila, coluna) || !validateCoord(fila, coluna)) {
+				fila = getRandomNumber(0, 10);
+				coluna = getRandomNumber(0, 10);
+			}
+			coordinates[0] = fila;
+			coordinates[1] = coluna;
+		}
+		return coordinates;
+	}
+
+	int getRandomNumber(int min, int max) {
+		return (int) ((Math.random() * (max - min)) + min);
+	}
+
+	private int[] getRandomCords(int subSize) {
+		int[] coordinates = new int[4];
+		coordinates[0] = getRandomNumber(0,9);
+		coordinates[1] = getRandomNumber(0,9);
+		coordinates[2] = getRandomNumber(0,9);
+		coordinates[3] = getRandomNumber(0,9);
+
+		while (cordDist(coordinates) != subSize){
+			coordinates[2] = getRandomNumber(0,9);
+			coordinates[3] = getRandomNumber(0,9);
+		}
+
+		return coordinates;
+	}
+
+	private int cordDist(int[] coordinates) {
+		if (coordinates[0] == coordinates[2]) {
+			return abs(coordinates[1] - coordinates[3]);
+		}else if (coordinates[1] == coordinates[3]) {
+			return abs(coordinates[0] - coordinates[2]);
+		}
+
+		return -1;
+	}
+
+
+	public void setRevivido(int subSize, int inicioFila, int inicioColuna, int fimFila, int fimColuna) {
+		if (inicioFila == fimFila) {    //Vertical
+			for (int i = 0; i < subSize; i++){
+				if(inicioColuna > fimColuna){ i = -1*i; }
+				BotMap.setOcupado(inicioFila, inicioColuna+i, true);
+				BotMap.setTipo(inicioFila, inicioColuna+i, true);
+				BotMap.setAtingido(inicioFila, inicioColuna+i, false);
+				BotMap.setRevivido(inicioFila, inicioColuna+i, true);
+				BotMap.setVisible(inicioFila, inicioColuna+i, true);
+			}
+		}else {      //Horizontal
+			for (int i = 0; i < subSize; i++){
+				if(inicioFila > inicioFila){ i = -1*i; }
+				BotMap.setOcupado(inicioFila+i, inicioColuna, true);
+				BotMap.setTipo(inicioFila+i, inicioColuna, true);
+				BotMap.setAtingido(inicioFila, inicioColuna+i, false);
+				BotMap.setRevivido(inicioFila, inicioColuna+i, true);
+				BotMap.setTipo(inicioFila+i, inicioColuna, true);
+				BotMap.setVisible(inicioFila, inicioColuna+i, true);
+			}
+		}
+	}
+
+//	static public Boolean montarMapaBot(String caminho)
+//	{
+//		String[][] cordenadas;
+//		CSVHandling local = new CSVHandling();
+//		local.setDataSource(caminho);
+//		cordenadas = local.requestCommands();
+//		coord = cordenadas;
+//		return VerificarCsv();
+//	}
+
+	public void krakenAttack() {
+
+	}
 }

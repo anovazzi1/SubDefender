@@ -21,11 +21,11 @@ public class alocateScreen implements Screen {
     private smallTitle title;
     private Stage stage;
     private inputCord inputCordenate;
-    private String subCords;
+    private int[] subCords = new int[4];
     private buttons inputButton;
     private submarines subs;
     private int counter=0;
-    private erroCordInvalida erro = new erroCordInvalida();
+    private erroCordInvalida erro = new erroCordInvalida(250, 310);
 
 
     public alocateScreen(final subdefenderApp game)
@@ -52,15 +52,16 @@ public class alocateScreen implements Screen {
         inputButton.alocate.addListener(new ClickListener(){
                                             @Override
                                             public void clicked(InputEvent event, float x, float y){
-                                                subCords = inputCordenate.getText();
-                                                if(game.validateAlocateSub(subCords, counter+1)){
-                                                    game.subCords[counter] = subCords;
-                                                    if(counter<4){
-                                                    game.alocateSubs[counter+1] = true;
+                                                String coordText = inputCordenate.getText();
+                                                if(tratarCoord(coordText) && game.validateAlocateSub(subCords, counter+1)){
+                                                    if(counter<5){
+                                                        game.alocateSubs(counter, subCords);
                                                     }
                                                     counter++;
+                                                    erro.setVisible(false);
+                                                }else {
+                                                    erro.showError();
                                                 }
-                                                erro.showError();
                                                 inputCordenate.setText("");
 
                                             }
@@ -123,5 +124,26 @@ public class alocateScreen implements Screen {
     private void initButtons() {
         inputButton.alocateButton();
         stage.addActor(inputButton.alocate);
+    }
+
+    private boolean tratarCoord(String coordsText){
+        try {
+            //Coordenadas inicio
+            int inicioFila = Character.toUpperCase(coordsText.charAt(0))%65;
+            int inicioColuna = Integer.parseInt(String.valueOf(coordsText.charAt(1)));
+
+            //Coordenadas fim
+            int fimFila = Character.toUpperCase(coordsText.charAt(3))%65;
+            int fimColuna = Integer.parseInt(String.valueOf(coordsText.charAt(4)));
+
+            subCords[0] = inicioFila;
+            subCords[1] = inicioColuna;
+            subCords[2] = fimFila;
+            subCords[3] = fimColuna;
+            return true;
+        }catch (Exception e){
+            System.out.println("Coordenadas invalidas! Tente Novamente");
+            return false;
+        }
     }
 }

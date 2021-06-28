@@ -1,6 +1,8 @@
-package com.subdefender.game.gui.components;
+package com.subdefender.game.map;
 
-public class CellTest {
+import com.subdefender.game.gui.components.inicializador;
+
+public class Celula {
     int i,j;
     private boolean isBot;
     private boolean visivel = false;
@@ -10,7 +12,7 @@ public class CellTest {
     private Boolean polvo = null;
     private boolean revivido = false;
 
-    public CellTest(int i, int j, Boolean isBot){
+    public Celula(int i, int j, Boolean isBot){
         this.isBot = isBot;
         this.i = i;
         this.j = j;
