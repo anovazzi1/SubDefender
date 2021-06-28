@@ -34,6 +34,7 @@ public class subdefenderApp extends Game {
 	public Screen battleship;
 	public Screen settings;
 	public Screen alocate;
+	public Screen gameOver;
 	// estado da musica do jogo
 	private boolean isMusicPlaying = true;
 	//dificuldade do jogo
@@ -41,7 +42,7 @@ public class subdefenderApp extends Game {
 	//numero de vidas
 	private int lifeCounter = 10;
 	//vetor com situação dos submarinos True: vivo, Falso:morto.
-	private boolean[] subStatus;
+	private boolean[] subStatusBot;
 	//vetor que mostra qual bala foi selecionada
 	private boolean[] selectedBullet;
 	//vetor com o numero de balas de cada bala
@@ -54,6 +55,8 @@ public class subdefenderApp extends Game {
 	public GridTest testeP;
 	public GridTest testeB;
 	public boolean[] alocateSubs;
+	public Boolean win =null;
+	public int score =0;
 
 	@Override
 	public void create() {
@@ -70,7 +73,7 @@ public class subdefenderApp extends Game {
 		pixel.getData().setScale(1.5f, 1.5f);
 		skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 		// inicialzação dos dados que serão usados pelo backend
-		subStatus = new boolean[5];
+		subStatusBot = new boolean[5];
 		selectedBullet = new boolean[3];
 		alocateSubs = new boolean[5];
 		ammo = new int[3];
@@ -87,6 +90,7 @@ public class subdefenderApp extends Game {
 		battleship = new gameScreen(this);
 		settings = new configScreen(this);
 		alocate = new alocateScreen(this);
+		gameOver = new endScreen(this);
 		//muda para tela inicial
 		this.setScreen(firstScreen);
 	}
@@ -148,12 +152,12 @@ public class subdefenderApp extends Game {
 	}
 
 	public boolean getSubStatus(int index) {
-		return subStatus[index];
+		return subStatusBot[index];
 	}
 
 	//verificacao que sera mudada para o backend
 	public void setSubStatus(boolean status, int index) {
-		this.subStatus[index] = status;
+		this.subStatusBot[index] = status;
 	}
 
 	public int getSelectedBullet() {
@@ -178,7 +182,7 @@ public class subdefenderApp extends Game {
 
 	private void initSubs() {
 		for (int i = 0; i < 5; i++) {
-			this.subStatus[i] = true;
+			this.subStatusBot[i] = true;
 		}
 	}
 

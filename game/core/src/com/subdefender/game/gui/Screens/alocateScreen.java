@@ -25,7 +25,7 @@ public class alocateScreen implements Screen {
     private buttons inputButton;
     private submarines subs;
     private int counter=0;
-    private erroCordInvalida erro = new erroCordInvalida();
+    private erroCordInvalida erro;
 
 
     public alocateScreen(final subdefenderApp game)
@@ -37,11 +37,13 @@ public class alocateScreen implements Screen {
         subs = new submarines(game);
         title = new smallTitle();
         stage = new Stage();
+        erro = new erroCordInvalida();
         stage.addActor(inputCordenate);
         stage.addActor(title);
         subs.addActors(stage);
         stage.addActor(erro);
         stage.addActor(sample);
+
     }
 
     @Override
