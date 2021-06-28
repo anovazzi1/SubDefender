@@ -35,6 +35,10 @@ Otavio Anovazzi - 186331
 
 [Slides da Apresentação Final](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/SUBDEFENDER.pptx)
 
+## Relatório de Evolução
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SUBDEFENDERS foi um jogo que surgiu com a ideia de modernizar o clássico. Suas maiores inspirações foram Batalha Naval e Space Invaders. Assim, o primeiro desafio foi saber como immlementar os conceitos apresentados por esses jogos clássicos, porém acrescentando features modernas e que venham utilizar as técnicas de orientação à objeto aprendido em sala de aula. Neste desafio a parte mais fácil foi criar novas features para o jogo. Em um momento de brainstorming levantamos a possibilidade de um implementar um bot pseudo-inteligente que contra atacasse a frota do jogador de forma precisa, implementar novas balas com poderes diferentes
+
+# Conclusões e Trabalhos Futuros
 
 # Diagramas
 
