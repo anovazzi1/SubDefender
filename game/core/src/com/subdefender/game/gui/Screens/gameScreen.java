@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.subdefender.game.gui.components.*;
@@ -26,6 +27,7 @@ public class gameScreen implements Screen {
     private int[] tiroCord = new int[2];
     private sound shootSound;
     private erroCordInvalida erro = new erroCordInvalida(430, 30);
+    private erroCordInvalida erro;
 
     public gameScreen(subdefenderApp game)
     {
@@ -44,12 +46,16 @@ public class gameScreen implements Screen {
         shootButton = new buttons(game);
         shootSound = new sound("sounds/470084__sheyvan__underwater-deep-impact.mp3");
         shootButton.shootButton();
+        erro = new erroCordInvalida();
+        erro.setPosition(200,80);
         stage.addActor(shootButton.shoot);
         stage.addActor(cordTiro);
         stage.addActor(title);
         stage.addActor(heart);
         subs.addActors(stage);
         balas.addActors(stage);
+        stage.addActor(erro);
+
     }
 
 

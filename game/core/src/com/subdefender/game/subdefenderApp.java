@@ -40,6 +40,7 @@ public class subdefenderApp extends Game {
 	public Screen settings;
 	public Screen alocate;
 
+	public Screen gameOver;
 	// estado da musica do jogo
 	private boolean isMusicPlaying = true;
 
@@ -81,6 +82,7 @@ public class subdefenderApp extends Game {
 		battleship = new gameScreen(this);
 		settings = new configScreen(this);
 		alocate = new alocateScreen(this);
+		gameOver = new endScreen(this);
 		//muda para tela inicial
 		this.setScreen(firstScreen);
 	}
@@ -105,6 +107,7 @@ public class subdefenderApp extends Game {
 	public boolean getisMusicPlaying() {
 		return isMusicPlaying;
 	}
+
 	public void setMusicPlaying(boolean musicPlaying) {
 		this.isMusicPlaying = musicPlaying;
 	}
