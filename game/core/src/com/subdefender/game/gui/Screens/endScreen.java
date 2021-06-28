@@ -43,15 +43,15 @@ public class endScreen implements Screen {
         if(game.win)
         {
             game.pixel.draw(game.batch,"VOCE VENCEU !!!",370,400);
-            game.pixel.draw(game.batch,("PARABENS "+ game.getName()+ ",\n voce destruiu toda frota inimiga" +
+            game.pixel.draw(game.batch,("PARABENS "+ game.jogador.getPlayerName()+ ",\n voce destruiu toda frota inimiga" +
                     "\n e dominou os sete mares"),200,300);
-            game.pixel.draw(game.batch,"score:"+ game.score,100,100);
+            game.pixel.draw(game.batch,"score:"+ game.jogador.getScore(),100,100);
         }
         else
         {
             game.pixel.draw(game.batch,"infelizmente soldado, voce falhou",200,400);
-            game.pixel.draw(game.batch,(game.getName()+ " virou comida de peixe\n"+ " perdeu todos os seus submarinos"+"\n tente novamente"),200,300);
-            game.pixel.draw(game.batch,"score:"+ game.score,100,100);
+            game.pixel.draw(game.batch,(game.jogador.getPlayerName()+ " virou comida de peixe\n"+ " perdeu todos os seus submarinos"+"\n tente novamente"),200,300);
+            game.pixel.draw(game.batch,"score:"+ game.jogador.getScore(),100,100);
         }
         game.batch.end();
     }

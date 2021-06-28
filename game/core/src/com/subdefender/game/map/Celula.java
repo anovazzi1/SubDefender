@@ -8,7 +8,7 @@ public class Celula {
     private boolean visivel = false;
     private boolean ocupado = false;
     private boolean atingido = false;
-    private Boolean tipo = null; // submarino é true, tesouro é false
+    private int tipo; // tesouro 1, tesouro 2, submarino 3
     private Boolean polvo = null;
     private boolean revivido = false;
 
@@ -43,11 +43,11 @@ public class Celula {
         this.atingido = atingido;
     }
 
-    public Boolean getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
-    public void setTipo(Boolean tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 

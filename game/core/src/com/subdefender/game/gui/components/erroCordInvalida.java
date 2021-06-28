@@ -12,6 +12,11 @@ public class erroCordInvalida extends Image implements error{
         setVisible(false);
     }
 
+    public erroCordInvalida() {
+        super(new Texture(Gdx.files.internal("ErrorMessages/coordenadas invalidas2.png")));
+        setVisible(false);
+    }
+
     @Override
     public void showError() {
         setVisible(true);

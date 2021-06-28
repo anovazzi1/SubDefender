@@ -41,6 +41,7 @@ public class subdefenderApp extends Game {
 	public Screen alocate;
 
 	public Screen gameOver;
+	public boolean win = true;
 	// estado da musica do jogo
 	private boolean isMusicPlaying = true;
 
@@ -75,6 +76,7 @@ public class subdefenderApp extends Game {
 		bot = new Bot();
 		BotMap = new Mapa(true);
 		PlayerMap = new Mapa(false);
+
 		setDificult(0);
 		//inicialização das telas
 		nameScreen = new inputScreen(this);
@@ -85,6 +87,25 @@ public class subdefenderApp extends Game {
 		gameOver = new endScreen(this);
 		//muda para tela inicial
 		this.setScreen(firstScreen);
+	}
+
+	private int[] getBotCoords(int i) {
+		String caminho = "data/mapaBot.csv";
+		CSVHandling csv = new CSVHandling();
+		csv.setDataSource(caminho);
+		String[] coordenadas = csv.requestCommands();
+		String[] coord = coordenadas[i].split(":");
+		int inicioFila = coord[0].charAt(0)%65;
+		int inicioColuna = Integer.parseInt(String.valueOf(coord[0].charAt(1)));
+		int fimFila = coord[0].charAt(3)%65;
+		int fimColuna =  Integer.parseInt(String.valueOf(coord[0].charAt(4)));
+
+		int[] subCords = new int[4];
+		subCords[0] = inicioFila;
+		subCords[1] = inicioColuna;
+		subCords[2] = fimFila;
+		subCords[3] = fimColuna;
+		return subCords;
 	}
 
 	@Override
@@ -111,7 +132,6 @@ public class subdefenderApp extends Game {
 	public void setMusicPlaying(boolean musicPlaying) {
 		this.isMusicPlaying = musicPlaying;
 	}
-
 
 	public int getDificult() {
 		return dificult;
@@ -142,9 +162,11 @@ public class subdefenderApp extends Game {
 	}
 	public void alocateSubs(int index, int[] subCords) {
 		this.PlayerMap.alocateSub(index+1, subCords, false);
-		this.BotMap.alocateSub(index+1, subCords, true); ////////////////////////////
 		this.jogador.alocateSub(index,subCords);
-		this.bot.alocateSub(index,subCords);
+		this.BotMap.alocateSub(index+1, getBotCoords(index), true);
+		this.BotMap.alocateTesouro(5, 1);
+		this.BotMap.alocateTesouro(6, 2);
+		this.bot.alocateSub(index, getBotCoords(index));
 	}
 
 	public int getSelectedBullet() {
@@ -180,10 +202,7 @@ public class subdefenderApp extends Game {
 	}
 
 	public boolean validateAlocateSub(int[] subCords, int tamanhoSub) {		//Valida as coordenadas para a alocacao dos submarinos
-		 if (validateCoord(subCords) && validarTamanhoCoords(subCords, tamanhoSub)){
-			 return true;
-		}
-		return false;
+		return validateCoord(subCords) && validarTamanhoCoords(subCords, tamanhoSub);
 	}
 
 	public boolean validateCoord(int[] subCords){
@@ -248,7 +267,6 @@ public class subdefenderApp extends Game {
 		}
         return false;
     }
-
 	private void usarPoder(int i, int fila, int coluna) {
 		if (i == 1) {
 			if(BotMap.getOcupado(fila,coluna)) BotMap.setVisible(fila, coluna, true);
@@ -262,195 +280,133 @@ public class subdefenderApp extends Game {
 
 		}else if (i == 2) {
 			validarTiro(fila, coluna);
-			validarTiro(fila+1, coluna);
-			validarTiro(fila, coluna+1);
-			validarTiro(fila-1, coluna);
-			validarTiro(fila, coluna-1);
+			if (fila+1 < 10) validarTiro(fila+1, coluna);
+			if(coluna+1 < 10) validarTiro(fila, coluna+1);
+			if(fila-1 >= 0) validarTiro(fila-1, coluna);
+			if(coluna-1 >= 0)validarTiro(fila, coluna-1);
 			jogador.balas[getSelectedBullet()].shot();
 		}
 	}
-
 	private void validarTiro(int fila, int coluna) {
 		if(BotMap.getOcupado(fila, coluna)){
-			if (BotMap.getTipo(fila, coluna)){
+			if (BotMap.getTipo(fila, coluna) == 3){
 				BotMap.setAtingido(fila, coluna, true);
+				jogador.setScore(1000);
 				for (Submarinos submarino: bot.submarinos) {
-					submarino.atingido(fila, coluna);
+					if (submarino.getVivo() && submarino.atirar(fila, coluna)){
+						bot.submarinoAbatido();
+						jogador.setScore(1000);
+					}
 				}
 			}
+			else if (BotMap.getTipo(fila, coluna) != 2) {
+				BotMap.setAtingido(fila, coluna, true);
+				jogador.balas[2].addQuantidade();
+			}
+			else if (BotMap.getTipo(fila, coluna) != 1) {
+				BotMap.setAtingido(fila, coluna, true);
+				jogador.balas[1].addQuantidade();
+			}
+		}else {
+			jogador.setScore(-100);
 		}
 		BotMap.setVisible(fila, coluna, true);
+		jogoGanho();
+	}
+
+	private void jogoGanho() {
+		if (jogador.getFrota() == 0) {
+			win = false;
+			setScreen(gameOver);
+
+		}else if (bot.getFrota() == 0) {
+			win = true;
+			setScreen(gameOver);
+		}
 	}
 
 	public boolean botShot(){
 		int[] coordinates = getBotShotCoord();
 		if(PlayerMap.getOcupado(coordinates[0], coordinates[1])){
-			if (PlayerMap.getTipo(coordinates[0], coordinates[1])){
+			if (PlayerMap.getTipo(coordinates[0], coordinates[1]) == 3){
 				PlayerMap.setAtingido(coordinates[0], coordinates[1], true);
 				for (Submarinos submarino: jogador.submarinos) {
-					submarino.atingido(coordinates[0], coordinates[1]);
+					if(submarino.atirar(coordinates[0], coordinates[1])){
+						jogador.submarinoAbatido();
+					}
 				}
 			}
 		}
 		PlayerMap.setVisible(coordinates[0], coordinates[1], true);
-		bot.setLastShot(coordinates[0], coordinates[1]);
 		return true;
 	}
 	public  int[] getBotShotCoord() {
 		int[] coordinates = new int[2];
-		if (bot.getLastShot()[0] != -1) {
-			int fila = bot.getLastShot()[0];
-			int coluna = bot.getLastShot()[1];
+		int fila = getRandomNumber(10);
+		int coluna = getRandomNumber(10);
 
-			if (fila - 1 >= 0 && PlayerMap.getAtingido(fila - 1, coluna) || fila + 1 < 10 && PlayerMap.getAtingido(fila + 1, coluna)) {
-				while (fila > 0) {
-					fila--;
-					if (PlayerMap.getVisible(fila, coluna)) {
-						break;
-					}
-					if (!PlayerMap.getAtingido(fila, coluna) && !PlayerMap.getVisible(fila, coluna)) {
-						coordinates[0] = fila;
-						coordinates[1] = coluna;
-						return coordinates;
-					}
-				}
-				while (fila < 10) {
-					fila++;
-					if (PlayerMap.getVisible(fila, coluna)) {
-						break;
-					}
-					if (!PlayerMap.getAtingido(fila, coluna) && !PlayerMap.getVisible(fila, coluna)) {
-						coordinates[0] = fila;
-						coordinates[1] = coluna;
-						return coordinates;
-					}
-				}
-			}
-			else if (coluna - 1 >= 0 && PlayerMap.getAtingido(fila, coluna - 1) || coluna + 1 < 10 && PlayerMap.getAtingido(fila, coluna + 1)) {
-				while (coluna > 0) {
-					coluna--;
-					if (PlayerMap.getVisible(fila, coluna)) {
-						break;
-					}
-					if (!PlayerMap.getAtingido(fila, coluna) && !PlayerMap.getVisible(fila, coluna)) {
-						coordinates[0] = fila;
-						coordinates[1] = coluna;
-						return coordinates;
-					}
-				}
-				while (coluna < 10) {
-					coluna++;
-					if (PlayerMap.getVisible(fila, coluna)) {
-						break;
-					}
-					if (!PlayerMap.getAtingido(fila, coluna) && !PlayerMap.getVisible(fila, coluna)) {
-						coordinates[0] = fila;
-						coordinates[1] = coluna;
-						return coordinates;
-					}
-				}
-			}
-			else {
-				int choice = getRandomNumber(0, 5);
-
-				while (true) {
-					if (fila - 1 >= 0 && !PlayerMap.getVisible(fila - 1, coluna) && choice == 1) {
-						fila = fila - 1;
-						break;
-					} if (fila + 1 < 10 && !PlayerMap.getVisible(fila + 1, coluna) && choice == 2) {
-						fila = fila + 1;
-						break;
-					} if (coluna - 1 >= 0 && !PlayerMap.getVisible(fila, coluna - 1) && choice == 3) {
-						coluna = coluna - 1;
-						break;
-					} if (coluna + 1 < 10 && !PlayerMap.getVisible(fila, coluna + 1) && choice == 4) {
-						coluna = coluna + 1;
-						break;
-					}
-					choice = getRandomNumber(0, 5);
-				}
-			}
-			coordinates[0] = fila;
-			coordinates[1] = coluna;
+		while (PlayerMap.getVisible(fila, coluna) || !validateCoord(fila, coluna)) {
+			fila = getRandomNumber(10);
+			coluna = getRandomNumber(10);
 		}
-		else {
-			int fila = getRandomNumber(0, 10);
-			int coluna = getRandomNumber(0, 10);
-
-			while (PlayerMap.getVisible(fila, coluna) || !validateCoord(fila, coluna)) {
-				fila = getRandomNumber(0, 10);
-				coluna = getRandomNumber(0, 10);
-			}
-			coordinates[0] = fila;
-			coordinates[1] = coluna;
-		}
-		return coordinates;
-	}
-
-	int getRandomNumber(int min, int max) {
-		return (int) ((Math.random() * (max - min)) + min);
-	}
-
-	private int[] getRandomCords(int subSize) {
-		int[] coordinates = new int[4];
-		coordinates[0] = getRandomNumber(0,9);
-		coordinates[1] = getRandomNumber(0,9);
-		coordinates[2] = getRandomNumber(0,9);
-		coordinates[3] = getRandomNumber(0,9);
-
-		while (cordDist(coordinates) != subSize){
-			coordinates[2] = getRandomNumber(0,9);
-			coordinates[3] = getRandomNumber(0,9);
-		}
+		coordinates[0] = fila;
+		coordinates[1] = coluna;
 
 		return coordinates;
 	}
 
-	private int cordDist(int[] coordinates) {
-		if (coordinates[0] == coordinates[2]) {
-			return abs(coordinates[1] - coordinates[3]);
-		}else if (coordinates[1] == coordinates[3]) {
-			return abs(coordinates[0] - coordinates[2]);
-		}
-
-		return -1;
+	int getRandomNumber(int max) {
+		return (int) (Math.random() * (max));
 	}
-
 
 	public void setRevivido(int subSize, int inicioFila, int inicioColuna, int fimFila, int fimColuna) {
 		if (inicioFila == fimFila) {    //Vertical
 			for (int i = 0; i < subSize; i++){
 				if(inicioColuna > fimColuna){ i = -1*i; }
 				BotMap.setOcupado(inicioFila, inicioColuna+i, true);
-				BotMap.setTipo(inicioFila, inicioColuna+i, true);
+				BotMap.setTipo(inicioFila, inicioColuna+i, 3);
 				BotMap.setAtingido(inicioFila, inicioColuna+i, false);
 				BotMap.setRevivido(inicioFila, inicioColuna+i, true);
 				BotMap.setVisible(inicioFila, inicioColuna+i, true);
 			}
 		}else {      //Horizontal
 			for (int i = 0; i < subSize; i++){
-				if(inicioFila > inicioFila){ i = -1*i; }
+				if(inicioFila > fimFila){ i = -1*i; }
 				BotMap.setOcupado(inicioFila+i, inicioColuna, true);
-				BotMap.setTipo(inicioFila+i, inicioColuna, true);
+				BotMap.setTipo(inicioFila+i, inicioColuna, 3);
 				BotMap.setAtingido(inicioFila, inicioColuna+i, false);
 				BotMap.setRevivido(inicioFila, inicioColuna+i, true);
-				BotMap.setTipo(inicioFila+i, inicioColuna, true);
+				BotMap.setTipo(inicioFila+i, inicioColuna, 3);
 				BotMap.setVisible(inicioFila, inicioColuna+i, true);
 			}
 		}
 	}
 
-//	static public Boolean montarMapaBot(String caminho)
-//	{
-//		String[][] cordenadas;
-//		CSVHandling local = new CSVHandling();
-//		local.setDataSource(caminho);
-//		cordenadas = local.requestCommands();
-//		coord = cordenadas;
-//		return VerificarCsv();
-//	}
-
 	public void krakenAttack() {
-
+		Mapa mapa;
+		Player player;
+		
+		if (getRandomNumber(100)%5 == 0) {
+			if (getRandomNumber(1) == 0) {
+				mapa = PlayerMap;
+				player = jogador;
+			}else {
+				mapa = BotMap;
+				player = bot;
+			}
+			int[] coordinates = getBotShotCoord();
+			if(mapa.getOcupado(coordinates[0], coordinates[1])){
+				if (mapa.getTipo(coordinates[0], coordinates[1]) == 3){
+					mapa.setAtingido(coordinates[0], coordinates[1], true);
+					for (Submarinos submarino: player.submarinos) {
+						if(submarino.atirar(coordinates[0], coordinates[1])){
+							player.submarinoAbatido();
+						}
+					}
+				}
+			}
+			mapa.setPolvo(coordinates[0], coordinates[1], true);
+			mapa.setVisible(coordinates[0], coordinates[1], true);
+		}
 	}
 }

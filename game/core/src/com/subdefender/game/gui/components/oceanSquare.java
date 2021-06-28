@@ -33,12 +33,12 @@ public class oceanSquare extends Image implements statusListener {
                 {
                     getStage().addActor(new tentacle(240 + (x * 30),160 + (y * 30)));
                 }
-                else if (game.BotMap.getOcupado(i, j) && game.BotMap.getAtingido(i, j) && game.BotMap.getTipo(i, j))
+                else if (game.BotMap.getOcupado(i, j) && game.BotMap.getAtingido(i, j) && game.BotMap.getTipo(i, j) == 3)
                 {
                     getStage().addActor(fogo);
                     fogo.addAction(Actions.fadeIn(1f));
                 }
-                else if(game.BotMap.getOcupado(i, j) && game.BotMap.getAtingido(i, j) && !game.BotMap.getTipo(i, j))
+                else if(game.BotMap.getOcupado(i, j) && game.BotMap.getAtingido(i, j) && game.BotMap.getTipo(i, j) != 3)
                 {
                     getStage().addActor(new Treasure(240 + (x * 30),160 + (y * 30)));
                 }
@@ -65,12 +65,12 @@ public class oceanSquare extends Image implements statusListener {
                 {
                     getStage().addActor(new tentacle(240 + (x * 30),160 + (y * 30)));
                 }
-                else if (game.PlayerMap.getOcupado(i, j) && game.PlayerMap.getAtingido(i, j) && game.PlayerMap.getTipo(i, j))
+                else if (game.PlayerMap.getOcupado(i, j) && game.PlayerMap.getAtingido(i, j) && game.PlayerMap.getTipo(i, j) == 3)
                 {
                     getStage().addActor(fogo);
                     fogo.addAction(Actions.fadeIn(1f));
                 }
-                else if(game.PlayerMap.getOcupado(i, j) && game.PlayerMap.getAtingido(i, j) && !game.PlayerMap.getTipo(i, j))
+                else if(game.PlayerMap.getOcupado(i, j) && game.PlayerMap.getAtingido(i, j) && game.PlayerMap.getTipo(i, j) != 3)
                 {
                     getStage().addActor(new Treasure(240 + (x * 30),160 + (y * 30)));
                 }

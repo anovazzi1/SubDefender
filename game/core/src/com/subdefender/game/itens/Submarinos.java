@@ -62,18 +62,25 @@ public class Submarinos {
         return alocado;
     }
 
-    public void atingido(int fila, int coluna) {
+    public boolean atirar(int fila, int coluna) {
 
         if (filaInicio == filaFim && fila == filaInicio) {        //VERTICAL=
-            if (colunaInicio <= coluna && coluna <= colunaFim){
+            if ((colunaInicio <= coluna && coluna <= colunaFim) || (colunaFim <= coluna && coluna <= colunaInicio)){
                 celulasFuncionais--;
+                if (celulasFuncionais <= 0) {
+                    this.vivo = false;
+                    return true;
+                }
             }
         }else if (coluna == colunaFim && coluna == colunaInicio) {    //HORIZONTAL
-            if (filaInicio <= fila && fila <= filaFim){
+            if ((filaInicio <= fila && fila <= filaFim) || (filaFim <= fila && fila <= filaInicio)){
                 celulasFuncionais--;
+                if (celulasFuncionais <= 0) {
+                    this.vivo = false;
+                    return true;
+                }
             }
         }
-
-        if (celulasFuncionais <= 0) { this.vivo = false; }
+        return false;
     }
 }

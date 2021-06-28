@@ -12,6 +12,10 @@ public class Tiro {
         this.qntd = valor;
     }
 
+    public void addQuantidade() {
+        this.qntd++;
+    }
+
     public void setPoder(int valor) {
         this.poder = valor;
     }

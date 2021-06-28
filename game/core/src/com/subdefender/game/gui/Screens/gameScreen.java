@@ -26,7 +26,6 @@ public class gameScreen implements Screen {
     private buttons shootButton;
     private int[] tiroCord = new int[2];
     private sound shootSound;
-    private erroCordInvalida erro = new erroCordInvalida(430, 30);
     private erroCordInvalida erro;
 
     public gameScreen(subdefenderApp game)

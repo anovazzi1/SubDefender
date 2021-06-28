@@ -1,5 +1,7 @@
 package com.subdefender.game.map;
 
+import com.subdefender.game.CSVHandling;
+
 public class Mapa {
     private Celula[][] celula = new Celula[10][10];
     private boolean isBot;
@@ -30,7 +32,7 @@ public class Mapa {
 
     }
 
-    public Boolean getTipo(int i, int j){
+    public int getTipo(int i, int j){
         return celula[i][j].getTipo();
     }
 
@@ -64,7 +66,7 @@ public class Mapa {
         celula[i][j].setAtingido(isAtingido);
     }
 
-    public void setTipo(int i, int j, boolean tipo)
+    public void setTipo(int i, int j, int tipo)
     {
         celula[i][j].setTipo(tipo);
     }
@@ -73,7 +75,6 @@ public class Mapa {
     {
         celula[i][j].setRevivido(isRevivido);
     }
-
 
     public void alocateSub(int subSize, int[] subCords, boolean isBot) {
         //Coordenadas inicio
@@ -87,23 +88,55 @@ public class Mapa {
 
         if (inicioFila == fimFila) {    //Vertical
             for (int i = 0; i < subSize; i++){
-                if(inicioColuna > fimColuna){ i = -1*i; }
-                setOcupado(inicioFila, inicioColuna+i, true);
-                setTipo(inicioFila, inicioColuna+i, true);
-                setAtingido(inicioFila, inicioColuna+i, false);
-                setRevivido(inicioFila, inicioColuna+i, false);
-                if(!isBot){ setVisible(inicioFila, inicioColuna+i, true); }
+                if(inicioColuna > fimColuna){
+                    int I = (-1)*i;
+                    setOcupado(inicioFila, inicioColuna+I, true);
+                    setTipo(inicioFila, inicioColuna+I, 3);
+                    setAtingido(inicioFila, inicioColuna+I, false);
+                    setRevivido(inicioFila, inicioColuna+I, false);
+                    if(!isBot){ setVisible(inicioFila, inicioColuna+I, true); }
+
+                }else{
+                    setOcupado(inicioFila, inicioColuna+i, true);
+                    setTipo(inicioFila, inicioColuna+i, 3);
+                    setAtingido(inicioFila, inicioColuna+i, false);
+                    setRevivido(inicioFila, inicioColuna+i, false);
+                    if(!isBot){ setVisible(inicioFila, inicioColuna+i, true); }
+                }
             }
         }else {      //Horizontal
             for (int i = 0; i < subSize; i++){
-                if(inicioFila > inicioFila){ i = -1*i; }
-                setOcupado(inicioFila+i, inicioColuna, true);
-                setTipo(inicioFila+i, inicioColuna, true);
-                setAtingido(inicioFila, inicioColuna+i, false);
-                setRevivido(inicioFila, inicioColuna+i, false);
-                if(!isBot){ setVisible(inicioFila+i, inicioColuna, true); }
+                if(inicioFila > inicioFila){
+                    int I = (-1)*i;
+                    setOcupado(inicioFila+I, inicioColuna, true);
+                    setTipo(inicioFila+I, inicioColuna, 3);
+                    setAtingido(inicioFila+I, inicioColuna, false);
+                    setRevivido(inicioFila+I, inicioColuna, false);
+                    if(!isBot){ setVisible(inicioFila+I, inicioColuna, true); }
+                }else {
+                    setOcupado(inicioFila + i, inicioColuna, true);
+                    setTipo(inicioFila + i, inicioColuna, 3);
+                    setAtingido(inicioFila + i, inicioColuna, false);
+                    setRevivido(inicioFila + i, inicioColuna, false);
+                    if (!isBot) {
+                        setVisible(inicioFila + i, inicioColuna, true);
+                    }
+                }
             }
         }
         setOcupado(fimFila, fimColuna, true);
+    }
+
+    public void alocateTesouro(int i, int poder) {
+        String caminho = "data/mapaBot.csv";
+        CSVHandling csv = new CSVHandling();
+        csv.setDataSource(caminho);
+        String[] coordenadas = csv.requestCommands();
+        String tesouro = coordenadas[i];
+        int fila = tesouro.charAt(0)%65;
+        int coluna = Integer.parseInt(String.valueOf(tesouro.charAt(1)));
+
+        setTipo(fila, coluna, poder);
+        setOcupado(fila, coluna, true);
     }
 }
