@@ -3,7 +3,7 @@
 
 
 * [Equipe](#equipe)
-* [Vídeos do Projeto](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/subdefender.mp4)
+* [Vídeos do Projeto](https://www.youtube.com/watch?v=hKskdlDX58Y)
 * [Slides do Projeto](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/SUBDEFENDER.pptx)
 * [Diagramas](#diagramas)
 
@@ -20,7 +20,7 @@ Otavio Anovazzi - 186331
 # Vídeos do Projeto
 [Vídeo da Prévia](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/subdefender.mp4)
 
-[Vídeo da Apresentação Final](https://github.com/otavioanovazzi/SubDefender/blob/main/assets/subdefender.mp4)
+[Vídeo da Apresentação Final](https://www.youtube.com/watch?v=hKskdlDX58Y)
 
 
 # Slides do Projeto
