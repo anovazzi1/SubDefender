@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="857e30a9-7cfb-49c1-8ab5-7c36424c669e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileChanges/last-build.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/configuration-cache/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries-with-intellij-classes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/CSVHandling.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/Players/Bot.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/Players/Player.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/Screens/alocateScreen$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/Screens/alocateScreen.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/Screens/configScreen.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/Screens/endScreen.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/Screens/gameScreen$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/Treasure.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/bulletListener.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/bullets.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/buttons$3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/buttons$4.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/buttons$5.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/buttons$6.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/cordTemplate.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/erroCordInvalida.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/error.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/fire.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/grid.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/heartLogo$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/heartLogo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/inicializador.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/inputCord.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/nameError.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/oceanSquare.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/ocupado.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/sampleGrid.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/smallTitle.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/statusListener.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/submarines.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/gui/components/tentacle.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/itens/Submarinos.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/itens/Tiro.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/map/Celula.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/build/classes/java/main/com/subdefender/game/map/Mapa.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/Screens/alocateScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/Screens/configScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/Screens/endScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/Treasure.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/bulletListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/bullets.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/cordTemplate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/erroCordInvalida.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/error.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/fire.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/grid.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/heartLogo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/inicializador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/inputCord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/nameError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/oceanSquare.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/ocupado.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/sampleGrid.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/smallTitle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/statusListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/submarines.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/com/subdefender/game/gui/components/tentacle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/ErrorMessages/coordenadas interceptam.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/ErrorMessages/coordenadas invalidas.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/ErrorMessages/coordenadas invalidas2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/ErrorMessages/erro nome.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/ErrorMessages/erro_nome2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/bala_comum.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/bala_poder2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/bala_poder3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/fogo30px.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/gridExample.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/heart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/mar30px.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/ocupado30px.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/sounds/470084__sheyvan__underwater-deep-impact.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/sounds/516076__breviceps__pirate-band-performs-drunken-sailor.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/sounds/518306__mrthenoronha__extra-life-8-bit.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/sub_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/sub_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/sub_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/sub_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/sub_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/tentaculo30px.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/tesouro30px.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/desktop/build/resources/main/titulo_600_150px.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/core/build/libs/core-1.0.jar" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1utlsy4kkKKeKW2SIPoD3uHQr7j" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/build.gradle" />
+  </component>
+  <component name="RunManager">
+    <configuration name="DesktopLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.subdefender.game.desktop.DesktopLauncher" />
+      <module name="SubDefender.desktop.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.subdefender.game.desktop.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.DesktopLauncher" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="857e30a9-7cfb-49c1-8ab5-7c36424c669e" name="Default Changelist" comment="" />
+      <created>1625492979064</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1625492979064</updated>
+      <workItem from="1625492982984" duration="331000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
