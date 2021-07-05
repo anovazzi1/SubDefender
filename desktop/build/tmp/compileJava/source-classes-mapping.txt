@@ -1,2 +1,0 @@
-com/subdefender/game/desktop/DesktopLauncher.java
- com.subdefender.game.desktop.DesktopLauncher
